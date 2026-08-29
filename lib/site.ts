@@ -124,7 +124,7 @@ export const music = {
 // files and list them here — e.g. story: ['/images/2.jpg','/images/2b.jpg', …].
 export const photos = {
   hero: '/images/1.jpg', // opening hero — the couple
-  story: ['/images/2.jpg'], // "God Wrote Our Story" milestones (4 slots on desktop)
+  story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/2.jpg'], // "God Wrote Our Story" milestones (4 slots, now all unique)
   parallax: ['/images/3.jpg', '/images/3-backup.jpg'], // full-screen parallax (3 slots)
   proposal: ['/images/4.jpg'], // proposal sequence (3 slots)
   bride: '/images/5-bride.jpg',
