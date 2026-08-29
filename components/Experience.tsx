@@ -27,6 +27,7 @@ import Footer from '@/components/Footer';
 import { useMusic } from '@/components/audio/MusicProvider';
 import EntryGate from '@/components/audio/EntryGate';
 import MusicToggle from '@/components/audio/MusicToggle';
+import DetailsJump from '@/components/DetailsJump';
 import VolumeAutomation from '@/components/audio/VolumeAutomation';
 import CreatorSection from '@/components/creator/CreatorSection';
 import CreatorCTA from '@/components/creator/CreatorCTA';
@@ -140,6 +141,7 @@ export default function Experience() {
       </main>
 
       <PetalFall />
+      <DetailsJump />
       <MusicToggle />
       <CreatorCTA />
       <VolumeAutomation />

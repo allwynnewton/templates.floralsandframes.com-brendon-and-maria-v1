@@ -147,7 +147,7 @@ export const photos = {
 // Single source of truth — change the name here and it updates everywhere.
 export const creator = {
   brand: 'Florals and Frames',
-  logo: '/images/companylogo.png',
+  logo: '/images/companylogo.jpg',
   whatsappNumber: '917020727961', // digits only, for wa.me
   whatsappDisplay: '+91 7020727961',
   location: 'Goa, India',
@@ -159,4 +159,62 @@ export const creator = {
 export function whatsappEnquiryUrl(): string {
   const message = `Hi ${creator.brand}! I just viewed the ${couple.groom} & ${couple.bride} wedding website and absolutely loved the experience. I'm interested in creating something similar for my wedding. Could you please share the pricing and process?`;
   return `https://wa.me/${creator.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+// ---------------------------------------------------------------------------
+// Add-to-calendar. One event spanning the day: starts at the ceremony, runs to
+// late evening. Both venues + times sit in the description; the ceremony is the
+// primary location (where the day begins).
+// ---------------------------------------------------------------------------
+function calendarEvent() {
+  const start = new Date(wedding.dateISO);
+  const end = new Date(start.getTime() + 7 * 60 * 60 * 1000); // ~ceremony → 11pm
+  return {
+    title: `${couple.groom} & ${couple.bride} — Wedding`,
+    start,
+    end,
+    location: `${wedding.ceremony.venue}, ${wedding.city}`,
+    details:
+      `${wedding.ceremony.title} — ${wedding.ceremony.venue}, ${wedding.ceremony.time}. ` +
+      `Reception to follow at ${wedding.reception.venue}, ${wedding.reception.time}.`,
+  };
+}
+
+// Date → UTC basic format for calendars: YYYYMMDDTHHMMSSZ
+function toCalDate(d: Date): string {
+  return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+}
+
+export function googleCalendarUrl(): string {
+  const e = calendarEvent();
+  return (
+    'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    `&text=${encodeURIComponent(e.title)}` +
+    `&dates=${toCalDate(e.start)}/${toCalDate(e.end)}` +
+    `&details=${encodeURIComponent(e.details)}` +
+    `&location=${encodeURIComponent(e.location)}`
+  );
+}
+
+// iCalendar text for Apple Calendar / Outlook (.ics download).
+export function icsContent(): string {
+  const e = calendarEvent();
+  const esc = (s: string) =>
+    s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Florals and Frames//Wedding//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `UID:${toCalDate(e.start)}-brendon-maria@floralsandframes.com`,
+    `DTSTAMP:${toCalDate(new Date())}`,
+    `DTSTART:${toCalDate(e.start)}`,
+    `DTEND:${toCalDate(e.end)}`,
+    `SUMMARY:${esc(e.title)}`,
+    `DESCRIPTION:${esc(e.details)}`,
+    `LOCATION:${esc(e.location)}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
 }
