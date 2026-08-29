@@ -98,6 +98,14 @@ export default function ReceptionSection() {
           </p>
           <p className="eyebrow mt-4 text-ivory/70">{wedding.reception.time}</p>
           <p className="eyebrow text-ivory/70">{wedding.reception.note}</p>
+          <a
+            href={wedding.reception.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost mt-8 text-ivory"
+          >
+            View Location
+          </a>
         </div>
       </div>
     </section>

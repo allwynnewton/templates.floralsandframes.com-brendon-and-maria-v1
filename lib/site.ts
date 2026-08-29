@@ -23,10 +23,11 @@ export const wedding = {
     mapUrl: 'https://maps.google.com/?q=Our+Lady+of+Grace+Church+Goa',
   },
   reception: {
-    venue: 'The Grand Ballroom',
-    resort: 'The Heritage Resort',
+    venue: 'Quinta de Valadares',
+    resort: 'Goa, India',
     time: '7:30 PM onwards',
     note: 'Dinner · Music · Dancing',
+    mapUrl: 'https://maps.app.goo.gl/krScyCQvPZeSNCfW9',
   },
 };
 
@@ -87,7 +88,7 @@ export const details = [
   },
   {
     title: 'Reception',
-    lines: ['The Grand Ballroom, Heritage Resort', '7:30 PM onwards', 'Dinner · Music · Dancing'],
+    lines: ['Quinta de Valadares, Goa', '7:30 PM onwards', 'Dinner · Music · Dancing'],
   },
   {
     title: 'Dress Code',
@@ -125,18 +126,18 @@ export const music = {
 export const photos = {
   hero: '/images/1.jpg', // opening hero — the couple
   story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/2.jpg'], // "God Wrote Our Story" milestones (4 slots, now all unique)
-  parallax: ['/images/3.jpg', '/images/3-backup.jpg'], // full-screen parallax (3 slots)
-  proposal: ['/images/4.jpg'], // proposal sequence (3 slots)
+  parallax: ['/images/3.jpg', '/images/3-backup.jpg', '/images/3c.jpg'], // full-screen parallax (3 slots, now all unique)
+  proposal: ['/images/4.jpg', '/images/4b.jpg'], // proposal sequence (2 cards, both unique)
   bride: '/images/5-bride.jpg',
   groom: '/images/5-groom.jpg',
-  // memory collage (5 slots) — filled with a varied mix so it looks full;
-  // swap in dedicated memory-*.jpg files whenever you have them.
+  // memory collage (5 slots) — now fully dedicated (no photos borrowed from
+  // other sections). Portrait tiles hold portrait shots; wide tiles hold landscape.
   memory: [
+    '/images/memory-2.jpg', // temp8 — B&W at the altar (portrait feature)
+    '/images/memory-1.jpg', // temp7 — joined hands at the ceremony (landscape)
     '/images/6.jpg',
-    '/images/2.jpg',
-    '/images/3.jpg',
-    '/images/4.jpg',
-    '/images/7.jpg',
+    '/images/memory-3.jpg', // temp1 — B&W clasped hands, bridal gown (portrait)
+    '/images/memory-4.jpg', // temp2 — gold rings on the Holy Bible (landscape)
   ],
   reception: '/images/7.jpg',
   farewell: '/images/8.jpg', // final blessing

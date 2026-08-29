@@ -88,19 +88,19 @@ export default function OurStory() {
           className="absolute left-6 top-0 h-full w-px -translate-x-1/2 origin-top scale-y-0 bg-gradient-to-b from-rose via-rose/70 to-rose/20 md:left-1/2"
         />
 
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {story.milestones.map((m, i) => {
             const left = i % 2 === 0;
             return (
               <div
                 key={m.year}
                 data-milestone
-                className="relative grid grid-cols-[auto_1fr] items-center gap-8 pl-16 md:grid-cols-2 md:gap-16 md:pl-0"
+                className="relative pl-16 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pl-0"
               >
                 {/* node dot */}
                 <span
                   data-node
-                  className="absolute left-6 top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose shadow-[0_0_18px_4px_rgba(217,139,152,0.45)] md:left-1/2"
+                  className="absolute left-6 top-8 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose shadow-[0_0_18px_4px_rgba(217,139,152,0.45)] md:left-1/2 md:top-1/2"
                 />
 
                 {/* text + photo, alternating on desktop */}
@@ -116,7 +116,7 @@ export default function OurStory() {
                 </div>
 
                 <div
-                  className={`${left ? 'md:order-2 md:pl-16' : 'md:order-1 md:pr-16'} hidden md:block`}
+                  className={`${left ? 'md:order-2 md:pl-16' : 'md:order-1 md:pr-16'} mt-6 md:mt-0`}
                 >
                   <Photo
                     src={photos.story[i % photos.story.length]}

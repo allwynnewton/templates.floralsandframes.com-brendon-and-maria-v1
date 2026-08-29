@@ -28,7 +28,7 @@ export default function ProposalSequence() {
           scrollTrigger: {
             trigger: root.current,
             start: 'top top',
-            end: '+=320%',
+            end: '+=220%',
             pin: true,
             scrub: 1,
           },
@@ -37,8 +37,8 @@ export default function ProposalSequence() {
         // heading resolves
         tl.to('[data-then]', { autoAlpha: 0, y: -20, duration: 1, ease: 'power2.in' }, 0.3)
           .to('[data-yes]', { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, 1)
-          // photos travel across
-          .to(track.current, { xPercent: -66, ease: 'none', duration: 4 }, 0.6);
+          // photos travel across (two cards)
+          .to(track.current, { xPercent: -18, ease: 'none', duration: 4 }, 0.6);
       });
 
       // MOBILE: no pin, gentle stacked reveal.
@@ -58,8 +58,9 @@ export default function ProposalSequence() {
   return (
     <section ref={root} className="relative overflow-hidden bg-mist text-ink">
       <div className="relative flex min-h-[100svh] flex-col justify-center py-24 md:h-[100svh] md:py-0">
-        {/* heading */}
-        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+        {/* heading — a section title at the top on mobile, a centered overlay
+            over the side-by-side cards on desktop */}
+        <div className="pointer-events-none relative z-20 mb-8 flex items-center justify-center text-center md:absolute md:inset-0 md:mb-0">
           <h2 data-then className="display-lg text-ink/90">
             AND THEN&hellip;
           </h2>
@@ -71,12 +72,12 @@ export default function ProposalSequence() {
         {/* horizontal track (desktop) / stacked (mobile) */}
         <div
           ref={track}
-          className="flex flex-col gap-10 px-6 md:w-[180%] md:flex-row md:gap-16 md:px-[8vw]"
+          className="flex flex-col gap-10 px-6 md:w-max md:flex-row md:gap-16 md:px-[8vw]"
         >
-          {[0, 1, 2].map((i) => (
+          {[0, 1].map((i) => (
             <figure
               key={i}
-              className="relative shrink-0 md:w-[46vw]"
+              className="relative shrink-0 md:w-[52vw]"
             >
               <Photo
                 src={photos.proposal[i % photos.proposal.length]}
