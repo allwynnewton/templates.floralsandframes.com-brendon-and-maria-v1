@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { ScrollTrigger } from '@/lib/gsap';
 
 import WeddingLoader from '@/components/WeddingLoader';
-import ChurchDoorHero from '@/components/ChurchDoorHero';
+import FloralArchHero from '@/components/FloralArchHero';
+import PetalFall from '@/components/PetalFall';
 import ScriptureIntro from '@/components/ScriptureIntro';
 import OurStory from '@/components/OurStory';
 import ParallaxMemories from '@/components/ParallaxMemories';
@@ -117,7 +118,7 @@ export default function Experience() {
       {!loading && <EntryGate />}
 
       <main className="relative">
-        <ChurchDoorHero />
+        <FloralArchHero />
         <ScriptureIntro />
         <OurStory />
         <ParallaxMemories />
@@ -138,6 +139,7 @@ export default function Experience() {
         <CreatorSection />
       </main>
 
+      <PetalFall />
       <MusicToggle />
       <CreatorCTA />
       <VolumeAutomation />

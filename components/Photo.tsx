@@ -13,7 +13,7 @@ import { CSSProperties } from 'react';
  *   whole site looks finished before any real photography exists.
  *
  * To use real photos: put files in /public/images and pass e.g.
- *   <Photo src="/images/hero-couple.jpg" alt="Brendon and Sarah" />
+ *   <Photo src="/images/hero-couple.jpg" alt="Brendon and Maria" />
  */
 
 type Tone = 'forest' | 'wine' | 'champagne' | 'charcoal' | 'ivory' | 'cream';

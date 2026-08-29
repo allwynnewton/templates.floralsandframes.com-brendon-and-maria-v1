@@ -1,8 +1,8 @@
 {
-  "name": "brendon-sarah-wedding",
+  "name": "brendon-maria-wedding",
   "version": "1.0.0",
   "private": true,
-  "description": "A cinematic Christian wedding invitation experience — Brendon & Sarah, 28.12.2026",
+  "description": "A cinematic Christian wedding invitation experience — Brendon & Maria, 28.12.2026",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

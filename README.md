@@ -1,4 +1,4 @@
-# Brendon & Sarah — A Cinematic Wedding Invitation
+# Brendon & Maria — A Cinematic Wedding Invitation
 
 An interactive, scroll-driven Christian wedding film built as a single page.
 The story runs: **darkness → the doors open → light → the couple → their story →

@@ -3,8 +3,8 @@
 
 export const couple = {
   groom: 'Brendon',
-  bride: 'Sarah',
-  initials: 'B + S',
+  bride: 'Maria',
+  initials: 'B + M',
 };
 
 export const wedding = {
@@ -95,7 +95,7 @@ export const details = [
   },
   {
     title: 'Accommodation',
-    lines: ['The Heritage Resort', 'Preferred rates for guests', 'Mention "Brendon & Sarah"'],
+    lines: ['The Heritage Resort', 'Preferred rates for guests', 'Mention "Brendon & Maria"'],
   },
   {
     title: 'Transportation',
