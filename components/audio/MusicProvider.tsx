@@ -77,6 +77,7 @@ export default function MusicProvider({ children }: { children: ReactNode }) {
     (fadeDuration: number) => {
       const a = audioRef.current;
       if (!a) return;
+      fadeRef.current?.kill();
       a.volume = 0;
       const p = a.play();
       const onOk = () => {
@@ -163,6 +164,8 @@ export default function MusicProvider({ children }: { children: ReactNode }) {
     document.addEventListener('visibilitychange', onVis);
     return () => document.removeEventListener('visibilitychange', onVis);
   }, [musicEnabled, isPlaying]);
+
+  useEffect(() => () => { fadeRef.current?.kill(); }, []);
 
   return (
     <MusicContext.Provider

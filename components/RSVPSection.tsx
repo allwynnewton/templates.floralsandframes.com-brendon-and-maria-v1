@@ -1,117 +1,39 @@
 'use client';
-
-import { FormEvent, useState } from 'react';
-import Reveal from './Reveal';
-import { couple } from '@/lib/site';
-
-type Status = 'idle' | 'accept' | 'decline';
-
-const fieldClass =
-  'w-full border-0 border-b border-ink/25 bg-transparent py-3 font-serif-e text-lg text-ink placeholder-ink/40 outline-none transition-colors focus:border-mauve';
-
+import { FormEvent, useRef, useState } from 'react';
+import { wedding } from '@/lib/site';
+import s from './experience.module.css';
 export default function RSVPSection() {
-  const [status, setStatus] = useState<Status>('idle');
-  const [decision, setDecision] = useState<'accept' | 'decline' | null>(null);
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>, choice: 'accept' | 'decline') {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const [reviewed, setReviewed] = useState(false);
+  const [ceremony, setCeremony] = useState('');
+  const [reception, setReception] = useState('');
+  const declining = ceremony === 'no' && reception === 'no';
+  function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Wire this up to your backend / form service (e.g. an API route or Formspree).
-    // For now it resolves to a graceful on-page confirmation.
-    setDecision(choice);
-    setStatus(choice);
+    const name = e.currentTarget.elements.namedItem('name') as HTMLInputElement;
+    name.setCustomValidity(name.value.trim() ? '' : 'Please enter your name.');
+    if (!e.currentTarget.reportValidity()) return;
+    setReviewed(true);
   }
-
-  return (
-    <section className="relative flex min-h-screen items-center justify-center bg-mist px-6 py-32 text-ink" data-music-vol="0.3">
-      <div className="w-full max-w-2xl">
-        <Reveal className="text-center">
-          <p className="eyebrow text-mauve">Kindly respond by 1 December 2026</p>
-          <h2 className="display-lg mt-6 text-ink">
-            WILL YOU
-            <br />
-            JOIN US?
-          </h2>
-        </Reveal>
-
-        {status !== 'idle' ? (
-          <Reveal className="mt-16 text-center">
-            <span className="fineline-cross mx-auto mb-8" aria-hidden />
-            <p className="font-display text-3xl text-mauve md:text-4xl">
-              {decision === 'accept'
-                ? 'With all our hearts, thank you.'
-                : 'You will be dearly missed.'}
-            </p>
-            <p className="mt-4 font-serif-e text-lg text-ink/70">
-              {decision === 'accept'
-                ? `${couple.groom} & ${couple.bride} can’t wait to celebrate with you.`
-                : 'Thank you for letting us know — you’ll be in our prayers.'}
-            </p>
-          </Reveal>
-        ) : (
-          <Reveal delay={0.1}>
-            <form className="mt-16 space-y-10" onSubmit={(e) => handleSubmit(e, 'accept')}>
-              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                <label className="block">
-                  <span className="eyebrow text-ink/60">Name</span>
-                  <input required name="name" className={fieldClass} placeholder="Your full name" />
-                </label>
-                <label className="block">
-                  <span className="eyebrow text-ink/60">Number of guests</span>
-                  <input
-                    type="number"
-                    min={1}
-                    max={10}
-                    defaultValue={1}
-                    name="guests"
-                    className={fieldClass}
-                  />
-                </label>
-              </div>
-
-              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                <label className="block">
-                  <span className="eyebrow text-ink/60">Attending Ceremony?</span>
-                  <select name="ceremony" className={`${fieldClass} appearance-none`}>
-                    <option className="bg-mist">Yes, joyfully</option>
-                    <option className="bg-mist">Unable to</option>
-                  </select>
-                </label>
-                <label className="block">
-                  <span className="eyebrow text-ink/60">Attending Reception?</span>
-                  <select name="reception" className={`${fieldClass} appearance-none`}>
-                    <option className="bg-mist">Yes, joyfully</option>
-                    <option className="bg-mist">Unable to</option>
-                  </select>
-                </label>
-              </div>
-
-              <label className="block">
-                <span className="eyebrow text-ink/60">Dietary notes</span>
-                <input name="dietary" className={fieldClass} placeholder="Anything we should know" />
-              </label>
-
-              <div className="flex flex-col items-center gap-6 pt-6 sm:flex-row sm:justify-center">
-                <button type="submit" className="btn-ghost text-ink">
-                  Joyfully Accept
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    const form = (e.currentTarget.closest('form') as HTMLFormElement);
-                    handleSubmit(
-                      { preventDefault: () => {}, currentTarget: form } as unknown as FormEvent<HTMLFormElement>,
-                      'decline',
-                    );
-                  }}
-                  className="text-xs uppercase tracking-[0.28em] text-ink/50 underline-offset-8 transition-colors hover:text-ink/80 hover:underline"
-                >
-                  Regretfully Decline
-                </button>
-              </div>
-            </form>
-          </Reveal>
-        )}
-      </div>
-    </section>
-  );
+  function close() { dialog.current?.close(); }
+  function trapTab(e: React.KeyboardEvent<HTMLDialogElement>) {
+    if (e.key !== 'Tab') return;
+    const controls = Array.from(e.currentTarget.querySelectorAll<HTMLElement>('button, input, select, textarea, a[href]')).filter(el => !el.hasAttribute('disabled'));
+    const first = controls[0]; const last = controls[controls.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+  }
+  return <>
+    <button className={s.button} ref={trigger} onClick={() => dialog.current?.showModal()} type="button">RSVP <span aria-hidden>↗</span></button>
+    <p className={s.rsvpDemo}>Demo form · Responses are not sent or saved.</p>
+    <dialog ref={dialog} className={s.dialog} aria-labelledby="rsvp-dialog-title" aria-describedby="rsvp-demo-description" onKeyDown={trapTab} onClose={() => { setReviewed(false); trigger.current?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const rect = e.currentTarget.getBoundingClientRect(); if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) close(); } }}>
+      <button className={s.dialogClose} type="button" onClick={close} aria-label="Close RSVP dialog">×</button><p className={s.eyebrow}>Kindly respond by {wedding.rsvpDeadline}</p><h2 id="rsvp-dialog-title">Will you join us?</h2><p id="rsvp-demo-description" className={s.demoNotice}>This is a demonstration. Responses are not sent or saved. Please use sample information.</p>
+      {reviewed ? <div role="status" className={s.demoResult}><h3>Demo preview complete.</h3><p>No RSVP was submitted. Your answers have not been sent or saved.</p><button type="button" className={s.button} onClick={() => setReviewed(false)}>Try the form again</button></div> : <form onSubmit={submit} className={s.form}>
+        <label>Your name *<input autoFocus required name="name" autoComplete="off" maxLength={100} placeholder="Your full name" onInput={e => e.currentTarget.setCustomValidity('')} /></label>
+        <div className={s.formColumns}><label>Attending the nuptials? *<select name="ceremony" required value={ceremony} onChange={e => setCeremony(e.target.value)}><option value="">Please choose</option><option value="yes">Joyfully accept</option><option value="no">Regretfully decline</option></select></label><label>Attending the reception? *<select name="reception" required value={reception} onChange={e => setReception(e.target.value)}><option value="">Please choose</option><option value="yes">Joyfully accept</option><option value="no">Regretfully decline</option></select></label></div>
+        <label>Number of guests (including you) *<input type="number" name="guests" required min={declining ? 0 : 1} max={10} defaultValue={1} /></label><label>Dietary notes <span className={s.optional}>(optional)</span><textarea name="dietary" rows={2} maxLength={500} placeholder="Anything you would like us to know" /></label><button className={s.button} type="submit">Preview demo response <span aria-hidden>↗</span></button>
+      </form>}
+    </dialog>
+  </>;
 }

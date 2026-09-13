@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "widths": [
+    1440,
+    768,
+    390
+  ],
+  "checks": [
+    "new illustration loads",
+    "no horizontal overflow",
+    "seconds update",
+    "IST date arithmetic",
+    "zero-clamped post-wedding state",
+    "no live-region announcements each second",
+    "no page errors"
+  ]
+}

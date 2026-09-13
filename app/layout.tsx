@@ -25,13 +25,13 @@ const script = Pinyon_Script({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://floralsandframes.com'),
+  metadataBase: new URL('https://templates.floralsandframes.com'),
   title: `${couple.groom} & ${couple.bride} · ${wedding.dateShort}`,
   description: `Together with their families, ${couple.groom} and ${couple.bride} invite you to celebrate their wedding — ${wedding.dateLabel}, ${wedding.city}.`,
   openGraph: {
     title: `${couple.groom} & ${couple.bride}`,
     description: `Together with their families, ${couple.groom} and ${couple.bride} invite you to celebrate their wedding — ${wedding.dateLabel}, ${wedding.city}.`,
-    url: 'https://floralsandframes.com',
+    url: 'https://templates.floralsandframes.com',
     siteName: `${couple.groom} & ${couple.bride}`,
     locale: 'en_US',
     type: 'website',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FBF4F2',
+  themeColor: '#F8F6EF',
   width: 'device-width',
   initialScale: 1,
 };
@@ -61,7 +61,6 @@ export default function RootLayout({
     >
       <body>
         {children}
-        <div className="grain" aria-hidden />
       </body>
     </html>
   );

@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ---- Light "white & pink florals" palette ---- */
+  --blush: #fbf4f2;
+  --porcelain: #ffffff;
+  --petal: #f7e4e7;
+  --mist: #eef2e9;
+  --rose: #d98b98;
+  --mauve: #9c6b78;
+  --sage: #93a583;
+  --champagne: #c2a063;
+  --champagne-soft: #d8c295;
+  --ink: #4a403c;
+  --inksoft: #6c635f;
+
+  /* ---- Motion ---- */
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* GSAP owns scroll-driven motion; avoid fighting it */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* clip (not hidden) keeps position:sticky/fixed pins working while preventing
+     any transient animation offset from creating horizontal scroll on mobile */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background-color: var(--blush);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+/* Elegant, thin scrollbar that doesn't break the mood */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 139, 152, 0.4);
+  border-radius: 99px;
+}
+
+::selection {
+  background: rgba(217, 139, 152, 0.28);
+  color: var(--ink);
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+.font-serif-e {
+  font-family: var(--font-serif), Georgia, serif;
+}
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+.eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: clamp(0.62rem, 0.9vw, 0.78rem);
+  font-weight: 400;
+}
+
+/* Massive editorial display sizing */
+.display-xl {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  line-height: 0.95;
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  letter-spacing: -0.01em;
+}
+.display-lg {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  line-height: 1;
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
+}
+.display-md {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  line-height: 1.05;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+}
+
+/* ---------- Utility layers ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(217, 139, 152, 0.7),
+    transparent
+  );
+}
+
+/* A refined thin outline button — no SaaS chrome */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2.2rem;
+  border: 1px solid rgba(156, 107, 120, 0.5);
+  color: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.7rem;
+  background: transparent;
+  transition:
+    background-color 0.6s var(--ease-cinematic),
+    color 0.6s var(--ease-cinematic),
+    border-color 0.6s var(--ease-cinematic);
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  background: var(--mauve);
+  border-color: var(--mauve);
+  color: var(--porcelain);
+}
+
+/* Small decorative cross — fine line, not clip-art */
+.fineline-cross {
+  position: relative;
+  width: 1px;
+  height: 44px;
+  background: rgba(217, 139, 152, 0.8);
+}
+.fineline-cross::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: -9px;
+  width: 19px;
+  height: 1px;
+  background: rgba(217, 139, 152, 0.8);
+}
+
+/* Cinematic church video — keep the building centred, mind portrait cropping */
+.cinematic-video {
+  object-fit: cover;
+  object-position: center center;
+}
+@media (max-width: 767px) {
+  .cinematic-video {
+    /* landscape footage on a portrait screen: bias toward the church body */
+    object-position: 50% 42%;
+  }
+}
+
+/* ---------- Persistent music control ---------- */
+.music-control {
+  position: fixed;
+  right: 1.4rem;
+  bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(156, 107, 120, 0.45);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--mauve);
+  cursor: pointer;
+  box-shadow: 0 8px 24px -12px rgba(74, 64, 60, 0.4);
+  transition:
+    transform 0.4s var(--ease-cinematic),
+    border-color 0.4s var(--ease-cinematic),
+    background-color 0.4s var(--ease-cinematic);
+}
+@media (min-width: 768px) {
+  .music-control {
+    width: 42px;
+    height: 42px;
+  }
+}
+.music-control:hover {
+  transform: scale(1.05);
+  border-color: rgba(156, 107, 120, 0.8);
+}
+.music-control:focus-visible {
+  outline: 2px solid var(--mauve);
+  outline-offset: 3px;
+}
+.music-note {
+  font-size: 1.05rem;
+  line-height: 1;
+  opacity: 0.5;
+}
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 16px;
+}
+.wave-bar {
+  width: 2.5px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--mauve);
+  transform-origin: center;
+  transform: scaleY(0.4);
+  animation-name: wavePulse;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+@keyframes wavePulse {
+  0% {
+    transform: scaleY(0.35);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wave-bar {
+    animation: none;
+    transform: scaleY(0.7);
+  }
+}
+
+/* ---------- Floating creator CTA (bottom-left, opposite the music control) ---------- */
+.creator-cta {
+  position: fixed;
+  left: 1.4rem;
+  bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.62rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(156, 107, 120, 0.45);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px -12px rgba(74, 64, 60, 0.4);
+  transition:
+    transform 0.4s var(--ease-cinematic),
+    border-color 0.4s var(--ease-cinematic),
+    background-color 0.4s var(--ease-cinematic);
+}
+.creator-cta:hover {
+  transform: scale(1.03);
+  border-color: rgba(156, 107, 120, 0.85);
+}
+.creator-cta:focus-visible {
+  outline: 2px solid var(--mauve);
+  outline-offset: 3px;
+}
+.creator-cta-heart {
+  color: var(--rose);
+}
+/* Brand + enquiry revealed as a small tooltip on desktop hover — keeps the pill small */
+.creator-cta-tip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  max-width: 260px;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(74, 64, 60, 0.96);
+  border: 1px solid rgba(217, 139, 152, 0.3);
+  color: var(--porcelain);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.35s var(--ease-cinematic),
+    transform 0.35s var(--ease-cinematic);
+}
+.creator-cta:hover .creator-cta-tip,
+.creator-cta:focus-visible .creator-cta-tip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* prevent flash of unstyled scroll while pinning is set up */
+.reveal-init {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init {
+    opacity: 1;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Florals and Frames//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:20261228T103000Z-brendon-maria@floralsandframes.com
+DTSTAMP:20260912T044600Z
+DTSTART:20261228T103000Z
+DTEND:20261228T173000Z
+SUMMARY:Brendon & Maria — Wedding
+DESCRIPTION:The Sacrament of Holy Matrimony — Our Lady of Grace Church\, 
+ 4:00 PM. Reception to follow at Quinta de Valadares\, 7:30 PM onwards.
+LOCATION:Our Lady of Grace Church\, Goa\, India
+END:VEVENT
+END:VCALENDAR

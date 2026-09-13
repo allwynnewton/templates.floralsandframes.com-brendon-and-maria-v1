@@ -1,0 +1,24 @@
+{
+  "componentChecks": [
+    {
+      "mode": "desktop",
+      "passed": true,
+      "timelines": 1,
+      "cleanup": true
+    },
+    {
+      "mode": "mobile",
+      "passed": true,
+      "timelines": 1,
+      "cleanup": true
+    },
+    {
+      "mode": "reduce",
+      "passed": true,
+      "timelines": 0,
+      "cleanup": true
+    }
+  ],
+  "browserReducedMotionEmulation": false,
+  "notes": "Live desktop/mobile forward and reverse DOM transforms checked separately through native CUA. Reduced-motion branch executes no animation; matchMedia cleanup verified with dependency stubs."
+}

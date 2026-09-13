@@ -17,3 +17,6 @@ npm-debug.log*
 .env*
 !.env.example
 next-env.d.ts
+
+# Local design critique snapshots
+/.impeccable/

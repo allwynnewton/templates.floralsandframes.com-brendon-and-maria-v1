@@ -1,0 +1,28 @@
+.section { background:var(--sage); border-block:1px solid #ae8c4838; padding:60px 6% 52px; }
+.inner { max-width:1100px; margin:auto; display:grid; grid-template-columns:minmax(0,440px) minmax(0,1fr); gap:8%; align-items:center; }
+.figure { margin:0; min-width:0; }
+.arch { position:relative; height:480px; isolation:isolate; overflow:hidden; clip-path:inset(0% 0% 0% 0% round 50% 50% 0% 0%); background:#b7ad93; }
+.image { position:absolute; inset:-3%; transform-origin:50% 52%; }
+.image img { object-fit:cover; object-position:50% 55%; }
+.light { position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,#f8f6ef0d,transparent 50%,#2830211a); }
+.figure figcaption { margin-top:13px; text-align:center; font-family:var(--font-sans),sans-serif; font-size:.75rem; color:#59614c; line-height:1.5; }
+.reading { text-align:center; padding:24px 0; color:var(--ink); }
+.cross { display:block; width:19px; height:29px; margin:0 auto 28px; fill:none; stroke:#92723a; stroke-width:1.1; stroke-linecap:round; }
+.reading blockquote { margin:0; font-family:var(--font-display),Georgia,serif; font-size:clamp(1.9rem,2.9vw,2.7rem); font-style:italic; font-weight:400; line-height:1.22; text-wrap:balance; }
+.reading .citation { margin:27px 0 0; font-family:var(--font-sans),sans-serif; font-size:.75rem; letter-spacing:.16em; line-height:1.7; text-transform:uppercase; }
+.reading .citation::before { content:''; display:block; width:44px; height:1px; margin:0 auto 23px; background:var(--gold); }
+@media (max-width:767px) {
+  .section { padding:38px 7% 40px; }
+  .inner { max-width:470px; grid-template-columns:1fr; gap:24px; }
+  .figure { width:100%; max-width:350px; margin:auto; }
+  .arch { height:clamp(280px,75vw,340px); }
+  .reading { padding:0; }
+  .cross { width:15px; height:23px; margin-bottom:18px; }
+  .reading blockquote { font-size:clamp(1.6rem,5.6vw,2rem); line-height:1.25; }
+  .reading .citation { font-size:.75rem; letter-spacing:.12em; margin-top:19px; }
+  .reading .citation::before { margin-bottom:16px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .arch { clip-path:inset(0% 0% 0% 0% round 50% 50% 0% 0%); opacity:1; }
+  .image { transform:none; }
+}
