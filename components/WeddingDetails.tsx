@@ -6,7 +6,11 @@ import { details, dressSwatches } from '@/lib/site';
 
 export default function WeddingDetails() {
   return (
-    <section id="details" className="scroll-mt-6 bg-blush px-6 py-32 text-ink md:py-48" data-music-vol="0.3">
+    <section
+      id="details"
+      className="scroll-mt-6 bg-blush px-6 py-32 text-ink md:py-48"
+      data-music-vol="0.3"
+    >
       <Reveal className="mb-20 text-center">
         <p className="eyebrow text-mauve">Everything you need to know</p>
         <h2 className="display-lg mt-6 text-ink">THE DETAILS</h2>

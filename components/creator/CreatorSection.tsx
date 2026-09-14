@@ -47,9 +47,7 @@ export default function CreatorSection() {
             className="mb-6 h-28 w-auto md:h-32"
           />
           <p className="eyebrow text-ink/45">A digital love story by</p>
-          <p className="font-display text-3xl text-mauve md:text-4xl">
-            {creator.brand}
-          </p>
+          <p className="font-display text-3xl text-mauve md:text-4xl">{creator.brand}</p>
           <p className="font-serif-e text-base text-ink/60">{creator.tagline}</p>
 
           <div className="mt-6 flex flex-col items-center gap-1.5">

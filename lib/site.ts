@@ -13,8 +13,6 @@ export const wedding = {
   dateLabel: '28 · DECEMBER · 2026',
   dateShort: '28 · 12 · 2026',
   day: 'MONDAY',
-  dateLong: '28 December 2026',
-  rsvpDeadline: '1 December 2026',
   time: '4:00 PM',
   city: 'Goa, India',
   ceremony: {
@@ -77,10 +75,7 @@ export const parallaxMoments = [
 ];
 
 export const proposal = {
-  captions: [
-    'Under a sky full of promises…',
-    '…we made one of our own.',
-  ],
+  captions: ['Under a sky full of promises…', '…we made one of our own.'],
 };
 
 export const details = [
@@ -106,10 +101,7 @@ export const details = [
   },
   {
     title: 'Contact',
-    lines: [
-      `Questions about ${couple.groom} & ${couple.bride}’s celebration?`,
-      'Guest contact details are not included in this demo.',
-    ],
+    lines: ['For any assistance', 'enquires@floralsandframes.come', '+91 7020727961'],
   },
 ];
 
@@ -129,14 +121,9 @@ export const music = {
 // if you provide fewer than the slots). To enrich a section, just add more
 // files and list them here — e.g. story: ['/images/2.jpg','/images/2b.jpg', …].
 export const photos = {
-  hero: '/images/hero-villa.webp', // generated cover for this fictional demo
-  floral: '/images/floral-corner.webp',
-  storyIntro: '/images/story-watercolor.webp',
-  milestone: ['/images/2a.jpg', '/images/2b.jpg', '/images/4b.jpg', '/images/2c.jpg'],
-  ceremony: '/images/3.jpg', // illustrative interior, not verified venue photography
-  scripture: '/images/church-aisle.webp', // optimized supplied image; venue not verified
+  hero: '/images/1.jpg', // opening hero — the couple
   story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/2.jpg'], // "God Wrote Our Story" milestones (4 slots, now all unique)
-  parallax: ['/images/3.jpg', '/images/3-backup.jpg', '/images/3c.jpg'], // full-screen parallax (3 slots, now all unique)
+  parallax: ['/images/3.jpg', '/images/3-cake.jpg', '/images/3c.jpg'], // full-screen parallax (3 slots, now all unique)
   proposal: ['/images/4.jpg', '/images/4b.jpg'], // proposal sequence (2 cards, both unique)
   bride: '/images/5-bride.jpg',
   groom: '/images/5-groom.jpg',
@@ -157,7 +144,6 @@ export const photos = {
 // Single source of truth — change the name here and it updates everywhere.
 export const creator = {
   brand: 'Florals and Frames',
-  website: 'https://floralsandframes.com',
   logo: '/images/companylogo.jpg',
   whatsappNumber: '917020727961', // digits only, for wa.me
   whatsappDisplay: '+91 7020727961',
@@ -193,7 +179,10 @@ function calendarEvent() {
 
 // Date → UTC basic format for calendars: YYYYMMDDTHHMMSSZ
 function toCalDate(d: Date): string {
-  return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return d
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}/, '');
 }
 
 export function googleCalendarUrl(): string {
@@ -218,7 +207,7 @@ export function icsContent(): string {
     'PRODID:-//Florals and Frames//Wedding//EN',
     'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
-    `UID:${toCalDate(e.start)}-${couple.groom.toLowerCase()}-${couple.bride.toLowerCase()}@floralsandframes.com`,
+    `UID:${toCalDate(e.start)}-brendon-maria@floralsandframes.com`,
     `DTSTAMP:${toCalDate(new Date())}`,
     `DTSTART:${toCalDate(e.start)}`,
     `DTEND:${toCalDate(e.end)}`,
@@ -227,15 +216,5 @@ export function icsContent(): string {
     `LOCATION:${esc(e.location)}`,
     'END:VEVENT',
     'END:VCALENDAR',
-  ].map(line => {
-    // RFC 5545: fold at 75 UTF-8 octets without splitting Unicode characters.
-    const encoder = new TextEncoder();
-    let folded = ''; let length = 0;
-    for (const char of line) {
-      const bytes = encoder.encode(char).length;
-      if (length + bytes > 75) { folded += '\r\n '; length = 1; }
-      folded += char; length += bytes;
-    }
-    return folded;
-  }).join('\r\n') + '\r\n';
+  ].join('\r\n');
 }

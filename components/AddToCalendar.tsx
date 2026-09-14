@@ -1,13 +1,37 @@
 'use client';
+
 import { googleCalendarUrl, icsContent } from '@/lib/site';
-import s from './experience.module.css';
+
+/**
+ * AddToCalendar — lets guests drop the wedding into their calendar in one tap.
+ * Google Calendar opens in a new tab; Apple / Outlook download a standard .ics.
+ */
 export default function AddToCalendar() {
-  function downloadIcs() {
-    const url = URL.createObjectURL(new Blob([icsContent()], { type: 'text/calendar;charset=utf-8' }));
+  const gcal = googleCalendarUrl();
+
+  const downloadIcs = () => {
+    const blob = new Blob([icsContent()], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = 'brendon-and-maria-wedding.ics';
-    document.body.appendChild(a); a.click(); a.remove();
+    a.href = url;
+    a.download = 'brendon-and-maria-wedding.ics';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-  return <div className={s.calendarLinks}><a href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden>↗</span></a><span aria-hidden>·</span><button type="button" onClick={downloadIcs}>Apple / Outlook <span className={s.downloadLabel}>.ics ↓</span></button></div>;
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-5">
+      <p className="eyebrow text-mauve">Save the date</p>
+      <div className="flex flex-wrap items-center justify-center gap-4">
+        <a href={gcal} target="_blank" rel="noopener noreferrer" className="btn-ghost text-ink">
+          Google Calendar
+        </a>
+        <button type="button" onClick={downloadIcs} className="btn-ghost text-ink">
+          Apple / Outlook
+        </button>
+      </div>
+    </div>
+  );
 }

@@ -62,23 +62,14 @@ export default function WeddingLoader({ onDone }: { onDone: () => void }) {
       ref={root}
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-blush"
     >
-      <div
-        data-loader-mark
-        className="font-display text-5xl md:text-6xl text-ink tracking-wide"
-      >
+      <div data-loader-mark className="font-display text-5xl md:text-6xl text-ink tracking-wide">
         {couple.initials}
       </div>
-      <div
-        data-loader-mark
-        className="eyebrow mt-6 text-mauve/80"
-      >
+      <div data-loader-mark className="eyebrow mt-6 text-mauve/80">
         {wedding.dateShort}
       </div>
       <div className="mt-10 h-px w-40 overflow-hidden bg-ink/10">
-        <div
-          ref={bar}
-          className="h-full w-full origin-left scale-x-0 bg-champagne"
-        />
+        <div ref={bar} className="h-full w-full origin-left scale-x-0 bg-champagne" />
       </div>
     </div>
   );

@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1800" viewBox="0 0 1400 1800">
+  <defs>
+    <radialGradient id="paperGlow" cx="50%" cy="38%" r="74%">
+      <stop offset="0%" stop-color="#fffdf8"></stop>
+      <stop offset="54%" stop-color="#fbf5ec"></stop>
+      <stop offset="100%" stop-color="#f0dfdb"></stop>
+    </radialGradient>
+
+    <radialGradient id="pinkGlow">
+      <stop offset="0%" stop-color="#eebac4" stop-opacity=".72"></stop>
+      <stop offset="100%" stop-color="#eebac4" stop-opacity="0"></stop>
+    </radialGradient>
+
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b673a"></stop>
+      <stop offset="45%" stop-color="#d6b67a"></stop>
+      <stop offset="100%" stop-color="#8e693b"></stop>
+    </linearGradient>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#76564d" flood-opacity=".18"></feDropShadow>
+    </filter>
+
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="45"></feGaussianBlur>
+    </filter>
+
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".78" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+      <feColorMatrix type="matrix" values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 .08 0
+        "></feColorMatrix>
+    </filter>
+
+    <clipPath id="arch">
+      <path d="M405 480
+               C405 295 535 205 700 205
+               C865 205 995 295 995 480
+               L995 950
+               L405 950 Z"></path>
+    </clipPath>
+  </defs>
+
+  <rect width="1400" height="1800" fill="url(#paperGlow)"></rect>
+
+  <ellipse cx="160" cy="280" rx="330" ry="330" fill="url(#pinkGlow)" filter="url(#blur)"></ellipse>
+
+  <ellipse cx="1240" cy="1470" rx="380" ry="380" fill="url(#pinkGlow)" filter="url(#blur)"></ellipse>
+
+  <rect x="72" y="72" width="1256" height="1656" rx="6" fill="none" stroke="#bc9563" stroke-opacity=".65" stroke-width="2"></rect>
+
+  <rect x="92" y="92" width="1216" height="1616" rx="4" fill="none" stroke="#bc9563" stroke-opacity=".24"></rect>
+
+  <!-- Top-left floral illustration -->
+  <g opacity=".92">
+    <path d="M75 335 C175 255 218 165 278 75" fill="none" stroke="#9a8064" stroke-width="5"></path>
+
+    <path d="M110 290 C165 278 203 239 228 194" fill="none" stroke="#89927d" stroke-width="4"></path>
+
+    <ellipse cx="142" cy="272" rx="34" ry="14" transform="rotate(-32 142 272)" fill="#adb79e"></ellipse>
+
+    <ellipse cx="202" cy="223" rx="38" ry="15" transform="rotate(-44 202 223)" fill="#909e82"></ellipse>
+
+    <ellipse cx="245" cy="148" rx="40" ry="16" transform="rotate(-61 245 148)" fill="#b5bca4"></ellipse>
+
+    <circle cx="83" cy="339" r="54" fill="#d89cac"></circle>
+    <circle cx="47" cy="310" r="34" fill="#efc9cf"></circle>
+    <circle cx="123" cy="304" r="37" fill="#c78091"></circle>
+    <circle cx="82" cy="337" r="22" fill="#fff0e9"></circle>
+    <circle cx="84" cy="338" r="8" fill="#be9261"></circle>
+  </g>
+
+  <!-- Bottom-right floral illustration -->
+  <g opacity=".92">
+    <path d="M1325 1470 C1222 1538 1192 1635 1122 1725" fill="none" stroke="#9a8064" stroke-width="5"></path>
+
+    <ellipse cx="1264" cy="1525" rx="42" ry="16" transform="rotate(-40 1264 1525)" fill="#9ba98e"></ellipse>
+
+    <ellipse cx="1208" cy="1590" rx="42" ry="16" transform="rotate(-47 1208 1590)" fill="#b5bca4"></ellipse>
+
+    <ellipse cx="1155" cy="1664" rx="38" ry="15" transform="rotate(-56 1155 1664)" fill="#87967b"></ellipse>
+
+    <circle cx="1312" cy="1460" r="57" fill="#d89cac"></circle>
+    <circle cx="1268" cy="1448" r="34" fill="#efc9cf"></circle>
+    <circle cx="1335" cy="1422" r="35" fill="#c78091"></circle>
+    <circle cx="1308" cy="1455" r="21" fill="#fff0e9"></circle>
+    <circle cx="1308" cy="1455" r="8" fill="#be9261"></circle>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="190" y="135" width="1020" height="1530" rx="4" fill="#fffdf8" fill-opacity=".86" stroke="#c6a36d" stroke-opacity=".46"></rect>
+  </g>
+
+  <text x="700" y="185" text-anchor="middle" fill="#896c48" font-family="Arial, sans-serif" font-size="20" letter-spacing="7">
+    TOGETHER WITH THEIR FAMILIES
+  </text>
+
+  <text x="700" y="276" text-anchor="middle" fill="#423831" font-family="Georgia, serif" font-size="68">
+    Brendon
+  </text>
+
+  <text x="700" y="340" text-anchor="middle" fill="#9a606d" font-family="cursive" font-size="76" font-style="italic">
+    &amp; Maria
+  </text>
+
+  <image href="/images/1.jpg" x="405" y="205" width="590" height="745" preserveAspectRatio="xMidYMid slice" clip-path="url(#arch)"></image>
+
+  <path d="M405 480
+       C405 295 535 205 700 205
+       C865 205 995 295 995 480
+       L995 950
+       L405 950 Z" fill="none" stroke="url(#gold)" stroke-width="5"></path>
+
+  <text x="700" y="1050" text-anchor="middle" fill="#9a606d" font-family="cursive" font-size="66" font-style="italic">
+    A day for forever
+  </text>
+
+  <line x1="390" y1="1110" x2="1010" y2="1110" stroke="#c3a16e" stroke-opacity=".55"></line>
+
+  <text x="700" y="1250" text-anchor="middle" fill="#966c38" font-family="Georgia, serif" font-size="190">
+    28
+  </text>
+
+  <text x="700" y="1365" text-anchor="middle" fill="#925d68" font-family="cursive" font-size="128" font-style="italic">
+    December
+  </text>
+
+  <text x="700" y="1450" text-anchor="middle" fill="#966c38" font-family="Georgia, serif" font-size="40" letter-spacing="22">
+    2026
+  </text>
+
+  <text x="700" y="1535" text-anchor="middle" fill="#50453d" font-family="Georgia, serif" font-size="27" letter-spacing="5">
+    MONDAY  ✧  4:00 PM  ✧  GOA, INDIA
+  </text>
+
+  <text x="700" y="1610" text-anchor="middle" fill="#966c38" font-family="Arial, sans-serif" font-size="18" letter-spacing="7">
+    SAVE THE DATE
+  </text>
+
+  <rect width="1400" height="1800" filter="url(#grain)" opacity=".35" pointer-events="none"></rect>
+</svg>

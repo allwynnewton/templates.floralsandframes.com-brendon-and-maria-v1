@@ -1,88 +1,44 @@
 'use client';
-
-import { useRef } from 'react';
-import { gsap, useGSAP } from '@/lib/gsap';
-import { couple, wedding, music } from '@/lib/site';
-
+import { creator, music, whatsappEnquiryUrl } from '@/lib/site';
 export default function Footer() {
-  const root = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      const q = gsap.utils.selector(root);
-
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-foot]'), { autoAlpha: 1, y: 0 });
-        gsap.set(q('[data-glow]'), { autoAlpha: 1, scale: 1 });
-      });
-
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap
-          .timeline({ scrollTrigger: { trigger: root.current, start: 'top 70%' } })
-          .fromTo(
-            q('[data-glow]'),
-            { autoAlpha: 0, scale: 0.4 },
-            { autoAlpha: 1, scale: 1, duration: 1.8, ease: 'power2.out' },
-          )
-          .fromTo(
-            q('[data-foot]'),
-            { autoAlpha: 0, y: 18 },
-            { autoAlpha: 1, y: 0, duration: 1.4, ease: 'power3.out', stagger: 0.25 },
-            '-=1',
-          );
-
-        // a slow, living breath on the light — no page auto-scroll
-        gsap.to(q('[data-glow]'), {
-          scale: 1.12,
-          opacity: 0.9,
-          duration: 3.2,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-      });
-    },
-    { scope: root },
-  );
-
   return (
-    <footer
-      ref={root}
-      className="relative flex min-h-[80vh] flex-col items-center justify-center bg-blush px-6 py-32 text-center"
-    >
-      {/* a single point of warm light with a fine cross at its heart */}
-      <div className="relative mb-16 flex h-24 w-24 items-center justify-center">
-        <span
-          data-glow
-          className="absolute inset-0 rounded-full"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(217,139,152,0.5) 0%, rgba(194,160,99,0.32) 40%, transparent 72%)',
-            filter: 'blur(6px)',
-          }}
-          aria-hidden
-        />
-        <span className="fineline-cross relative z-10" aria-hidden />
+    <footer className="site-footer">
+      <a
+        className="footer-brand"
+        href="https://floralsandframes.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Florals <em>&</em> Frames
+      </a>
+      <p>Thoughtfully crafted wedding websites · {creator.location}</p>
+      <div className="footer-links">
+        <a href={whatsappEnquiryUrl()} target="_blank" rel="noopener noreferrer">
+          Create your invitation ↗
+        </a>
+        <a href="#top">Back to the beginning ↑</a>
       </div>
-
-      <p data-foot className="font-display text-3xl tracking-wide text-ink md:text-4xl">
-        {couple.groom.toUpperCase()} &amp; {couple.bride.toUpperCase()}
-      </p>
-      <p data-foot className="eyebrow mt-5 text-mauve">
-        {wedding.dateShort}
-      </p>
-
-      {music.track && (
-        <p data-foot className="mt-10 text-[0.58rem] tracking-[0.2em] text-ink/25">
-          Music: {music.track}
-          {music.artist ? ` — ${music.artist}` : ''}
+      <details>
+        <summary>Music & artwork credits</summary>
+        <p>
+          Music: {music.track} — {music.artist}
         </p>
-      )}
-
-      <p data-foot className="mt-6 text-[0.6rem] uppercase tracking-[0.3em] text-ink/30">
-        Made with love &amp; prayer
-      </p>
+        <p>
+          “3D Ring” by{' '}
+          <a href="https://sketchfab.com/EmmaTurk" target="_blank" rel="noopener noreferrer">
+            EmmaTurk
+          </a>
+          ,{' '}
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CC BY-NC-SA 4.0
+          </a>
+          . Materials, lighting and presentation adapted for this invitation.
+        </p>
+      </details>
     </footer>
   );
 }

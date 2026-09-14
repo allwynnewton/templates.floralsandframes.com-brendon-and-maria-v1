@@ -95,7 +95,12 @@ function petalRings(tones: [string, string, string], full: boolean) {
     for (let i = 0; i < n; i++) {
       const a = rot + (i * 360) / n;
       els.push(
-        <path key={`${ri}-${i}`} d={PETAL} fill={fill} transform={`translate(50 52) rotate(${a}) scale(${s})`} />,
+        <path
+          key={`${ri}-${i}`}
+          d={PETAL}
+          fill={fill}
+          transform={`translate(50 52) rotate(${a}) scale(${s})`}
+        />,
       );
     }
   });
@@ -133,7 +138,14 @@ function hydrangea(tones: [string, string, string]) {
 function leafSprig(tones: [string, string, string]) {
   const [light, mid, deep] = tones;
   const els: React.ReactNode[] = [
-    <path key="stem" d="M50 94 C 50 70 50 38 50 10" stroke={deep} strokeWidth={2.2} fill="none" strokeLinecap="round" />,
+    <path
+      key="stem"
+      d="M50 94 C 50 70 50 38 50 10"
+      stroke={deep}
+      strokeWidth={2.2}
+      fill="none"
+      strokeLinecap="round"
+    />,
   ];
   [82, 68, 54, 40, 26].forEach((y, i) => {
     [-1, 1].forEach((sd, si) => {
@@ -333,12 +345,20 @@ export default function FloralArchHero() {
 
           // STAGE 3 — Pass through (3 → 5): the arch scales up and lifts past us.
           tl.addLabel('passThrough', 3)
-            .to(archGroup, { scale: archScale, yPercent: -14, autoAlpha: 0.04, duration: 2, ease: 'power2.in' }, 3)
+            .to(
+              archGroup,
+              { scale: archScale, yPercent: -14, autoAlpha: 0.04, duration: 2, ease: 'power2.in' },
+              3,
+            )
             .to(glow, { autoAlpha: 1, scale: 1.2, duration: 2, ease: 'power2.out' }, 3);
 
           // STAGE 4 — The couple emerges in the light (4.6 → 6.6).
           tl.addLabel('coupleReveal', 4.6)
-            .to(couplePhoto, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 2, ease: 'power2.out' }, 4.6)
+            .to(
+              couplePhoto,
+              { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 2, ease: 'power2.out' },
+              4.6,
+            )
             .to(heroScrim, { autoAlpha: 1, duration: 2, ease: 'power2.out' }, 4.8)
             .to(glow, { autoAlpha: 0.4, duration: 1.6 }, 5.2);
 
@@ -347,7 +367,14 @@ export default function FloralArchHero() {
             .to(above, { autoAlpha: 1, y: 0, duration: 0.9 }, 6.6)
             .to(
               nameLetters,
-              { autoAlpha: 1, y: 0, letterSpacing: '0.03em', duration: 1.4, ease: 'power3.out', stagger: 0.2 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                letterSpacing: '0.03em',
+                duration: 1.4,
+                ease: 'power3.out',
+                stagger: 0.2,
+              },
               6.7,
             )
             .to(below, { autoAlpha: 1, y: 0, duration: 0.9 }, 7.5);
@@ -386,10 +413,7 @@ export default function FloralArchHero() {
         </svg>
       )}
 
-      <div
-        ref={stage}
-        className="relative h-[100svh] w-full overflow-hidden bg-blush"
-      >
+      <div ref={stage} className="relative h-[100svh] w-full overflow-hidden bg-blush">
         {/* ---- The world beyond the arch: soft sky → sea → lawn ---- */}
         <div
           data-beyond
@@ -557,7 +581,10 @@ export default function FloralArchHero() {
               <span data-name-line className="block">
                 {couple.groom.toUpperCase()}
               </span>
-              <span data-name-line className="block font-script text-rose text-[0.42em] leading-none my-1">
+              <span
+                data-name-line
+                className="block font-script text-rose text-[0.42em] leading-none my-1"
+              >
                 &amp;
               </span>
               <span data-name-line className="block">

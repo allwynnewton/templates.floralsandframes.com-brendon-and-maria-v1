@@ -126,10 +126,7 @@ export default function Photo({
   seed = 1,
 }: PhotoProps) {
   return (
-    <div
-      className={className}
-      style={{ position: 'relative', overflow: 'hidden', ...style }}
-    >
+    <div className={className} style={{ position: 'relative', overflow: 'hidden', ...style }}>
       {src ? (
         <Image
           src={src}

@@ -1,88 +1,148 @@
+// 'use client';
+// import { useRef } from 'react';
+// import { gsap, useGSAP } from '@/lib/gsap';
+// import { wedding } from '@/lib/site';
+// import AddToCalendar from './AddToCalendar';
+// export default function WeddingDate() {
+//   const root = useRef<HTMLElement>(null);
+//   useGSAP(
+//     () => {
+//       const mm = gsap.matchMedia();
+//       mm.add('(prefers-reduced-motion: no-preference)', () => {
+//         gsap.from('.date-composition', {
+//           opacity: 0,
+//           y: 40,
+//           scale: 0.96,
+//           duration: 1.5,
+//           ease: 'power3.out',
+//           scrollTrigger: { trigger: root.current, start: 'top 70%' },
+//         });
+//       });
+//       return () => mm.revert();
+//     },
+//     { scope: root },
+//   );
+//   return (
+//     <section ref={root} className="date-section">
+//       <div className="date-composition">
+//         <p className="eyebrow">Together with our families</p>
+//         <h2>
+//           A day for <em>forever</em>
+//         </h2>
+//         <div className="date-lockup" aria-label="28 December 2026">
+//           <span className="date-day">28</span>
+//           <span className="date-month">December</span>
+//           <span className="date-year">2026</span>
+//         </div>
+//         <p className="date-time">
+//           {wedding.day} <span>✧</span> {wedding.time} <span>✧</span> Goa, India
+//         </p>
+//         <AddToCalendar />
+//       </div>
+//     </section>
+//   );
+// }
+
+
 'use client';
 
+import Image from 'next/image';
 import { useRef } from 'react';
+
 import { gsap, useGSAP } from '@/lib/gsap';
-import { wedding } from '@/lib/site';
+import AddToCalendar from './AddToCalendar';
 
 export default function WeddingDate() {
-  const root = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      const q = gsap.utils.selector(root);
 
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set([q('[data-d28]'), q('[data-dmonth]'), q('[data-d2026]')], { autoAlpha: 0 });
-        gsap.set(q('[data-combined]'), { autoAlpha: 1, scale: 1 });
-        gsap.set(q('[data-daytime]'), { autoAlpha: 1, y: 0 });
-      });
+      mm.add(
+        '(prefers-reduced-motion: no-preference)',
+        () => {
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: root.current,
+                start: 'top 72%',
+              },
+            })
+            .fromTo(
+              '.wedding-card-image',
+              {
+                autoAlpha: 0,
+                y: 65,
+                scale: 0.94,
+                rotateX: 4,
+              },
+              {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                rotateX: 0,
+                duration: 1.6,
+                ease: 'power3.out',
+              },
+            )
+            .fromTo(
+              '.wedding-card-actions',
+              {
+                autoAlpha: 0,
+                y: 24,
+              },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+              },
+              '-=0.6',
+            );
+        },
+      );
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.set(q('[data-d28]'), { autoAlpha: 0, scale: 1.4 });
-        gsap.set(q('[data-dmonth]'), { autoAlpha: 0, xPercent: 60 });
-        gsap.set(q('[data-d2026]'), { autoAlpha: 0, scale: 0.7 });
-        gsap.set(q('[data-combined]'), { autoAlpha: 0, scale: 0.9 });
-        gsap.set(q('[data-daytime]'), { autoAlpha: 0, y: 30 });
-
-        const tl = gsap.timeline({
-          defaults: { ease: 'power2.out' },
-          scrollTrigger: {
-            trigger: root.current,
-            start: 'top top',
-            end: '+=300%',
-            pin: true,
-            scrub: 1,
-          },
-        });
-
-        tl.to('[data-d28]', { autoAlpha: 1, scale: 1, duration: 1.2 })
-          .to('[data-dmonth]', { autoAlpha: 1, xPercent: 0, duration: 1.4 }, 1)
-          .to('[data-d2026]', { autoAlpha: 1, scale: 1, duration: 1.2 }, 2)
-          // dissolve the stacked words, resolve to the compact date
-          .to(['[data-d28]', '[data-dmonth]', '[data-d2026]'], {
-            autoAlpha: 0,
-            scale: 0.8,
-            duration: 1,
-            ease: 'power2.in',
-          }, 3.4)
-          .to('[data-combined]', { autoAlpha: 1, scale: 1, duration: 1.2 }, 4)
-          .to('[data-daytime]', { autoAlpha: 1, y: 0, duration: 1 }, 4.6);
-      });
+      return () => mm.revert();
     },
-    { scope: root },
+    {
+      scope: root,
+    },
   );
 
   return (
     <section
       ref={root}
-      className="relative flex h-[100svh] items-center justify-center overflow-hidden bg-blush text-ink"
+      className="wedding-card-section"
     >
-      {/* stacked words */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span data-d28 className="display-xl leading-none text-ink">
-          28
-        </span>
-        <span
-          data-dmonth
-          className="font-display text-[12vw] uppercase tracking-[0.1em] text-mauve md:text-[7vw]"
-        >
-          December
-        </span>
-        <span data-d2026 className="display-xl leading-none text-ink">
-          2026
-        </span>
-      </div>
+      <div
+        className="wedding-card-glow wedding-card-glow-left"
+        aria-hidden
+      />
 
-      {/* resolved compact date */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
-        <span data-combined className="display-lg text-mauve">
-          {wedding.dateShort}
-        </span>
-        <div data-daytime className="flex items-center gap-6 text-ink/80">
-          <span className="eyebrow">{wedding.day}</span>
-          <span className="h-4 w-px bg-champagne/60" />
-          <span className="eyebrow">{wedding.time}</span>
+      <div
+        className="wedding-card-glow wedding-card-glow-right"
+        aria-hidden
+      />
+
+      <div className="wedding-card-layout">
+        <div className="wedding-card-image">
+          <Image
+            src="/images/card.png"
+            alt="Wedding invitation for Brendon and Maria on Monday, 28 December 2026 at 4 PM in Goa"
+            width={1024}
+            height={1536}
+            sizes="(max-width: 768px) 92vw, 660px"
+            unoptimized
+          />
+        </div>
+
+        <div className="wedding-card-actions">
+          <p className="wedding-card-action-copy">
+            Keep our day close
+          </p>
+
+          <AddToCalendar />
         </div>
       </div>
     </section>

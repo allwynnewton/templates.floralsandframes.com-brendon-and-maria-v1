@@ -12,13 +12,9 @@ export default function WeddingAnnouncement() {
       </Reveal>
 
       <Reveal delay={0.15} className="my-12 flex flex-col items-center">
-        <h2 className="display-xl leading-[0.9] text-ink">
-          {couple.groom.toUpperCase()}
-        </h2>
+        <h2 className="display-xl leading-[0.9] text-ink">{couple.groom.toUpperCase()}</h2>
         <span className="font-script my-2 text-5xl text-mauve md:text-7xl">&amp;</span>
-        <h2 className="display-xl leading-[0.9] text-ink">
-          {couple.bride.toUpperCase()}
-        </h2>
+        <h2 className="display-xl leading-[0.9] text-ink">{couple.bride.toUpperCase()}</h2>
       </Reveal>
 
       <Reveal delay={0.25} className="flex flex-col items-center text-center">

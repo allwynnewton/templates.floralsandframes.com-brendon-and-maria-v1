@@ -1,95 +1,84 @@
 'use client';
-
 import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import Photo from './Photo';
-import { parallaxMoments, photos } from '@/lib/site';
-
-const tones = ['forest', 'wine', 'champagne'] as const;
-
+import { photos } from '@/lib/site';
 export default function ParallaxMemories() {
-  const root = useRef<HTMLDivElement>(null);
-
+  const root = useRef<HTMLElement>(null);
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      const q = gsap.utils.selector(root);
-
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-par-img]'), { yPercent: 0 });
-        gsap.set(q('[data-par-cap]'), { autoAlpha: 1, y: 0 });
-      });
-
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Oversized image moves slower than the viewport -> parallax.
-        q('[data-par-panel]').forEach((panel) => {
-          const img = panel.querySelector('[data-par-img]');
+        gsap.utils.toArray<HTMLElement>('.chapter-scene').forEach((scene) => {
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: scene, start: 'top 85%', end: 'top 5%', scrub: 0.7 },
+          });
+          tl.fromTo(
+            scene.querySelector('.chapter-image'),
+            { clipPath: 'inset(12% 17% 12% 17% round 40% 40% 0 0)' },
+            { clipPath: 'inset(0% 0% 0% 0% round 0% 0% 0 0)', ease: 'none' },
+          ).fromTo(
+            scene.querySelectorAll('.chapter-caption > *'),
+            { y: 55, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.15 },
+            0.2,
+          );
           gsap.fromTo(
-            img,
-            { yPercent: -12 },
+            scene.querySelector('img'),
+            { scale: 1.14 },
             {
-              yPercent: 12,
+              scale: 1,
+              yPercent: 4,
               ease: 'none',
-              scrollTrigger: {
-                trigger: panel,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1,
-              },
+              scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: 0.7 },
             },
           );
-
-          const cap = panel.querySelector('[data-par-cap]');
-          if (cap) {
-            gsap.fromTo(
-              cap,
-              { autoAlpha: 0, y: 30 },
-              {
-                autoAlpha: 1,
-                y: 0,
-                duration: 1.3,
-                ease: 'power3.out',
-                scrollTrigger: { trigger: panel, start: 'top 55%' },
-              },
-            );
-          }
         });
       });
+      return () => mm.revert();
     },
     { scope: root },
   );
-
   return (
-    <section ref={root} className="bg-blush">
-      {parallaxMoments.map((m, i) => (
-        <div
-          key={i}
-          data-par-panel
-          className="relative h-[85vh] w-full overflow-hidden md:h-screen"
-        >
-          {/* image is oversized so parallax never exposes edges */}
-          <div data-par-img className="absolute inset-x-0 -top-[12%] h-[124%]">
-            <Photo
-              src={photos.parallax[i % photos.parallax.length]}
-              alt={m.caption}
-              tone={tones[i % tones.length]}
-              label={`memory ${i + 1}`}
-              seed={i + 11}
-              style={{ position: 'absolute', inset: 0 }}
-              sizes="100vw"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/30 to-ink/25" />
-          <div className="absolute inset-0 flex items-end justify-center pb-24 md:items-center md:pb-0">
-            <p
-              data-par-cap
-              className="font-display text-4xl text-ivory drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)] md:text-6xl"
-            >
-              {m.caption}
-            </p>
-          </div>
+    <section ref={root} className="chapters-section">
+      <article className="chapter-scene">
+        <div className="chapter-image">
+          <Photo
+            src={photos.parallax[1]}
+            alt="A quiet moment shared by the couple"
+            className="fill-photo"
+          />
+          <div className="chapter-shade" />
         </div>
-      ))}
+        <div className="chapter-caption">
+          <p className="eyebrow">Every love story is beautiful</p>
+          <h2>
+            But this one
+            <br />
+            <em>is ours.</em>
+          </h2>
+          <span className="chapter-number">I</span>
+        </div>
+      </article>
+      <article className="chapter-scene chapter-next">
+        <div className="chapter-image">
+          <Photo
+            src={photos.parallax[2]}
+            alt="Brendon and Maria looking toward their future"
+            className="fill-photo"
+          />
+          <div className="chapter-shade" />
+        </div>
+        <div className="chapter-caption">
+          <p className="eyebrow">And with you beside me</p>
+          <h2>
+            Our favourite chapter
+            <br />
+            <em>begins here.</em>
+          </h2>
+          <span className="chapter-number">II</span>
+        </div>
+      </article>
     </section>
   );
 }

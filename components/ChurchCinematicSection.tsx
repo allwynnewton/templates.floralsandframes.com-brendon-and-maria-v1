@@ -123,18 +123,35 @@ export default function ChurchCinematicSection() {
 
             // extremely subtle push-in, only over the first stage
             if (isDesktop) {
-              tl.fromTo(q('[data-video]'), { scale: 1.03 }, { scale: 1, duration: 16, ease: 'power1.out' }, 0);
+              tl.fromTo(
+                q('[data-video]'),
+                { scale: 1.03 },
+                { scale: 1, duration: 16, ease: 'power1.out' },
+                0,
+              );
             }
 
             // ---- STAGE 1 — SACRAMENT (0–15) ----
             tl.addLabel('sacrament', 0)
-              .to(q('[data-sacrament]'), { autoAlpha: 1, y: 0, letterSpacing: '0.04em', duration: 11 }, 1)
-              .to(q('[data-sacrament]'), { autoAlpha: 0, y: -18, duration: 3, ease: 'power2.in' }, 12.5);
+              .to(
+                q('[data-sacrament]'),
+                { autoAlpha: 1, y: 0, letterSpacing: '0.04em', duration: 11 },
+                1,
+              )
+              .to(
+                q('[data-sacrament]'),
+                { autoAlpha: 0, y: -18, duration: 3, ease: 'power2.in' },
+                12.5,
+              );
 
             // ---- STAGE 2 — GRATITUDE (15–30), with a breath of silence first ----
             tl.addLabel('gratitude', 18)
               .to(q('[data-gratitude]'), { autoAlpha: 1, y: 0, duration: 8 }, 18)
-              .to(q('[data-gratitude]'), { autoAlpha: 0, y: -14, duration: 3, ease: 'power2.in' }, 28);
+              .to(
+                q('[data-gratitude]'),
+                { autoAlpha: 0, y: -14, duration: 3, ease: 'power2.in' },
+                28,
+              );
 
             // ---- STAGE 3 — SILENCE (30–47): nothing. The footage carries it. ----
             tl.addLabel('silence', 30);
@@ -152,7 +169,11 @@ export default function ChurchCinematicSection() {
 
             // ---- STAGE 6 — CHURCH IDENTITY (82–94) ----
             tl.addLabel('church', 82)
-              .to([q('[data-names]'), q('[data-date]')], { autoAlpha: 0, y: -24, duration: 3, ease: 'power2.in' }, 82)
+              .to(
+                [q('[data-names]'), q('[data-date]')],
+                { autoAlpha: 0, y: -24, duration: 3, ease: 'power2.in' },
+                82,
+              )
               .to(q('[data-church]'), { autoAlpha: 1, y: 0, duration: 7 }, 84)
               .to(q('[data-goldline]'), { scaleX: 1, duration: 5, ease: 'power2.inOut' }, 88);
 
@@ -281,10 +302,7 @@ export default function ChurchCinematicSection() {
           </div>
 
           {/* S2 — Gratitude (lower centre) */}
-          <div
-            data-gratitude
-            className="absolute inset-x-0 bottom-[16%] px-6 text-center"
-          >
+          <div data-gratitude className="absolute inset-x-0 bottom-[16%] px-6 text-center">
             <p className="eyebrow text-ivory/85">With gratitude to God</p>
             <p className="eyebrow mt-2 text-ivory/85">and joy in our hearts</p>
           </div>
@@ -299,7 +317,11 @@ export default function ChurchCinematicSection() {
               >
                 {couple.groom}
               </h2>
-              <span data-amp className="font-script my-1 text-rose" style={{ fontSize: 'clamp(2rem,5vw,4rem)' }}>
+              <span
+                data-amp
+                className="font-script my-1 text-rose"
+                style={{ fontSize: 'clamp(2rem,5vw,4rem)' }}
+              >
                 &amp;
               </span>
               <h2
@@ -312,7 +334,10 @@ export default function ChurchCinematicSection() {
             </div>
 
             <div data-date className="mt-10 flex flex-col items-center gap-3">
-              <p className="font-display tracking-wide text-rose" style={{ fontSize: 'clamp(1.6rem,4vw,3rem)' }}>
+              <p
+                className="font-display tracking-wide text-rose"
+                style={{ fontSize: 'clamp(1.6rem,4vw,3rem)' }}
+              >
                 {wedding.dateLabel}
               </p>
               <p className="eyebrow text-ivory/80">
@@ -356,7 +381,10 @@ export default function ChurchCinematicSection() {
           className="absolute inset-0 flex-col items-center justify-center gap-6 px-6 text-center text-ivory"
         >
           <p className="eyebrow text-ivory/80">The Sacrament of Holy Matrimony</p>
-          <h2 className="font-display uppercase leading-[0.9]" style={{ fontSize: 'clamp(3rem, 9vw, 6rem)' }}>
+          <h2
+            className="font-display uppercase leading-[0.9]"
+            style={{ fontSize: 'clamp(3rem, 9vw, 6rem)' }}
+          >
             {couple.groom} &amp; {couple.bride}
           </h2>
           <p className="font-display text-rose" style={{ fontSize: 'clamp(1.4rem,4vw,2.4rem)' }}>
@@ -369,7 +397,10 @@ export default function ChurchCinematicSection() {
             <h3 className="font-display" style={{ fontSize: 'clamp(1.8rem,5vw,3rem)' }}>
               {wedding.ceremony.venue}
             </h3>
-            <span data-goldline className="block h-px w-24 bg-gradient-to-r from-transparent via-rose to-transparent" />
+            <span
+              data-goldline
+              className="block h-px w-24 bg-gradient-to-r from-transparent via-rose to-transparent"
+            />
             <p className="eyebrow text-ivory/75">{wedding.ceremony.place}</p>
             <a
               href={wedding.ceremony.mapUrl}

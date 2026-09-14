@@ -53,8 +53,7 @@ export default function CovenantSection() {
       ref={root}
       className="flex min-h-screen flex-col items-center justify-center px-6 py-40 text-center"
       style={{
-        background:
-          'linear-gradient(180deg, #fbf4f2 0%, #eef2e9 50%, #f7e4e7 100%)',
+        background: 'linear-gradient(180deg, #fbf4f2 0%, #eef2e9 50%, #f7e4e7 100%)',
       }}
     >
       <h2 data-cov="heading" className="display-lg text-ink">

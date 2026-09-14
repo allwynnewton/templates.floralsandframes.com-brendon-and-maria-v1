@@ -18,15 +18,13 @@ export default function EntryGate() {
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
-      gsap
-        .timeline({ defaults: { ease: 'power3.out' } })
-        .from('[data-gate-item]', {
-          autoAlpha: 0,
-          y: 18,
-          duration: 1.2,
-          stagger: 0.22,
-          delay: 0.2,
-        });
+      gsap.timeline({ defaults: { ease: 'power3.out' } }).from('[data-gate-item]', {
+        autoAlpha: 0,
+        y: 18,
+        duration: 1.2,
+        stagger: 0.22,
+        delay: 0.2,
+      });
     },
     { scope: root },
   );

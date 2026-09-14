@@ -45,9 +45,7 @@ export default function Reveal({
           scrollTrigger: {
             trigger: ref.current,
             start: 'top 82%',
-            toggleActions: once
-              ? 'play none none none'
-              : 'play reverse play reverse',
+            toggleActions: once ? 'play none none none' : 'play reverse play reverse',
           },
         });
       });

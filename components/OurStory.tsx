@@ -1,136 +1,110 @@
 'use client';
-
 import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
+import { story, photos } from '@/lib/site';
 import Photo from './Photo';
 import Reveal from './Reveal';
-import { story, photos } from '@/lib/site';
-
-const tones = ['forest', 'wine', 'champagne', 'charcoal'] as const;
-
 export default function OurStory() {
-  const root = useRef<HTMLDivElement>(null);
-
+  const root = useRef<HTMLElement>(null);
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       const q = gsap.utils.selector(root);
-
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-line-fill]'), { scaleY: 1 });
-        gsap.set(q('[data-node]'), { autoAlpha: 1, scale: 1 });
-        gsap.set(q('[data-milestone]'), { autoAlpha: 1, y: 0 });
-      });
-
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // The line grows downward with scroll (scrubbed).
-        gsap.fromTo(
-          q('[data-line-fill]'),
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: q('[data-timeline]'),
-              start: 'top 70%',
-              end: 'bottom 70%',
-              scrub: 1,
+      mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
+        const shots = q('.story-desktop-photo');
+        gsap.set(shots.slice(1), { clipPath: 'inset(100% 0 0 0)' });
+        q('.story-milestone').forEach((chapter, i) => {
+          if (i === 0) return;
+          gsap.fromTo(
+            shots[i],
+            { clipPath: 'inset(100% 0% 0% 0%)' },
+            {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              ease: 'none',
+              scrollTrigger: { trigger: chapter, start: 'top 80%', end: 'top 38%', scrub: 0.6 },
             },
-          },
-        );
-
-        // Each milestone illuminates as it arrives.
-        q('[data-milestone]').forEach((el) => {
-          const node = el.querySelector('[data-node]');
-          gsap.set(el, { autoAlpha: 0, y: 40 });
-          gsap.set(node, { autoAlpha: 0.25, scale: 0.6 });
-          gsap
-            .timeline({
-              scrollTrigger: { trigger: el, start: 'top 72%' },
-            })
-            .to(el, { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' })
-            .to(node, { autoAlpha: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 0.1);
+          );
         });
       });
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        q('.story-milestone').forEach((chapter) => {
+          gsap.from(chapter.querySelectorAll('.story-copy > *'), {
+            y: 28,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: chapter, start: 'top 75%' },
+          });
+        });
+        gsap.from(q('.story-rail-fill'), {
+          scaleY: 0,
+          transformOrigin: 'top',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: q('.story-body'),
+            start: 'top 55%',
+            end: 'bottom 65%',
+            scrub: 0.5,
+          },
+        });
+      });
+      return () => mm.revert();
     },
     { scope: root },
   );
-
+  const notes = [
+    'A simple hello. A conversation neither of us wanted to end.',
+    'The little things became our favourite things — because we shared them.',
+    'One question, a thousand butterflies, and the easiest yes.',
+    'With grateful hearts, we begin a lifetime of choosing each other.',
+  ];
   return (
-    <section
-      ref={root}
-      className="relative bg-blush px-6 py-32 text-ink md:py-48"
-    >
-      <Reveal className="mx-auto mb-24 max-w-4xl text-center">
-        <p className="eyebrow mb-8 text-mauve">Chapter One</p>
-        <h2 className="display-lg text-ink">
-          GOD WROTE
-          <br />
-          OUR STORY
+    <section ref={root} className="story-section" id="our-story">
+      <Reveal className="section-heading">
+        <p className="eyebrow">Chapter one · Our beginning</p>
+        <h2>
+          God wrote <em>our story</em>
         </h2>
-        <div className="mx-auto mt-12 max-w-2xl space-y-1">
-          {story.intro.map((l, i) => (
-            <p key={i} className="font-serif-e text-lg text-ink/70 md:text-xl">
-              {l}
-            </p>
-          ))}
-        </div>
+        <p className="story-intro">{story.intro.join(' ')}</p>
       </Reveal>
-
-      <div
-        data-timeline
-        className="relative mx-auto max-w-5xl"
-      >
-        {/* center rail */}
-        <div className="absolute left-6 top-0 h-full w-px -translate-x-1/2 bg-ink/10 md:left-1/2" />
-        <div
-          data-line-fill
-          className="absolute left-6 top-0 h-full w-px -translate-x-1/2 origin-top scale-y-0 bg-gradient-to-b from-rose via-rose/70 to-rose/20 md:left-1/2"
-        />
-
-        <div className="space-y-16 md:space-y-32">
-          {story.milestones.map((m, i) => {
-            const left = i % 2 === 0;
-            return (
-              <div
-                key={m.year}
-                data-milestone
-                className="relative pl-16 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pl-0"
-              >
-                {/* node dot */}
-                <span
-                  data-node
-                  className="absolute left-6 top-8 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose shadow-[0_0_18px_4px_rgba(217,139,152,0.45)] md:left-1/2 md:top-1/2"
+      <div className="story-body">
+        <div className="story-stage">
+          <div className="story-photo-stack">
+            {story.milestones.map((m, i) => (
+              <div key={m.year} className="story-desktop-photo">
+                <Photo
+                  src={photos.story[i]}
+                  alt={`${m.year}: ${m.title}`}
+                  className="fill-photo"
+                  sizes="45vw"
                 />
-
-                {/* text + photo, alternating on desktop */}
-                <div
-                  className={`${left ? 'md:order-1 md:text-right md:pr-16' : 'md:order-2 md:pl-16'} col-span-1`}
-                >
-                  <p className="font-display text-5xl text-mauve md:text-7xl">
-                    {m.year}
-                  </p>
-                  <p className="mt-2 font-serif-e text-xl text-ink/80 md:text-2xl">
-                    {m.title}
-                  </p>
-                </div>
-
-                <div
-                  className={`${left ? 'md:order-2 md:pl-16' : 'md:order-1 md:pr-16'} mt-6 md:mt-0`}
-                >
-                  <Photo
-                    src={photos.story[i % photos.story.length]}
-                    alt={`${m.year} — ${m.title}`}
-                    tone={tones[i % tones.length]}
-                    label={m.year}
-                    seed={i + 3}
-                    className="aspect-[4/5] w-full"
-                    sizes="(max-width: 768px) 90vw, 40vw"
-                  />
-                </div>
+                <span className="story-photo-index">0{i + 1} / 04</span>
               </div>
-            );
-          })}
+            ))}
+          </div>
+          <p className="story-footnote">The little moments that led us here.</p>
+        </div>
+        <div className="story-chapters">
+          <div className="story-rail">
+            <span className="story-rail-fill" />
+          </div>
+          {story.milestones.map((m, i) => (
+            <article className="story-milestone" key={m.year}>
+              <span className="story-dot" />
+              <div className="story-copy">
+                <p className="story-year">{m.year}</p>
+                <h3>{m.title}</h3>
+                <p>{notes[i]}</p>
+              </div>
+              <Photo
+                src={photos.story[i]}
+                alt={m.title}
+                className="story-mobile-photo"
+                sizes="90vw"
+              />
+            </article>
+          ))}
         </div>
       </div>
     </section>

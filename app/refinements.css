@@ -1,0 +1,1026 @@
+/* =========================================================
+   FLORALS & FRAMES — GLOW AND CARD REFINEMENTS
+========================================================= */
+
+:root {
+  --wedding-paper: #fffaf3;
+  --wedding-ivory: #faf4eb;
+  --wedding-pink: #e8b6c0;
+  --wedding-pink-soft: #f4d9de;
+  --wedding-rose: #925d68;
+  --wedding-gold: #b5925a;
+  --wedding-gold-light: #dfc28d;
+  --wedding-ink: #3c322d;
+  --wedding-muted: #786961;
+}
+
+/* Shallow pink glow used throughout the entire page */
+body {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 8% 15%,
+      rgba(236, 177, 191, 0.24),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 94% 36%,
+      rgba(244, 204, 212, 0.34),
+      transparent 33%
+    ),
+    radial-gradient(
+      circle at 18% 72%,
+      rgba(229, 177, 188, 0.2),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 88% 90%,
+      rgba(239, 194, 204, 0.27),
+      transparent 31%
+    ),
+    #faf5ee;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 25% 28%,
+      rgba(255, 255, 255, 0.78),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 72% 76%,
+      rgba(255, 248, 241, 0.72),
+      transparent 35%
+    );
+}
+
+/* Apply the same soft depth to light page sections */
+.story-section,
+.scripture-section,
+.proposal-section,
+.date-section,
+.couple-section,
+.gallery-section,
+.celebration-section {
+  position: relative;
+  background-color: transparent;
+}
+
+.story-section::before,
+.proposal-section::before,
+.couple-section::before,
+.gallery-section::before,
+.celebration-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(233, 174, 188, 0.15),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 78%,
+      rgba(244, 207, 214, 0.22),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 251, 246, 0.88),
+      rgba(249, 238, 235, 0.66)
+    );
+}
+
+/* =========================================================
+   IMAGE-BASED WEDDING DATE CARD
+========================================================= */
+
+.wedding-card-section {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 24px 125px;
+  background:
+    radial-gradient(
+      circle at 15% 32%,
+      rgba(235, 176, 190, 0.28),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 86% 72%,
+      rgba(247, 209, 215, 0.4),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      #fffaf3 0%,
+      #f8eaea 52%,
+      #fffaf4 100%
+    );
+}
+
+.wedding-card-glow {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.48;
+}
+
+.wedding-card-glow-left {
+  top: 4%;
+  left: -180px;
+  background: rgba(231, 156, 176, 0.55);
+}
+
+.wedding-card-glow-right {
+  right: -180px;
+  bottom: 2%;
+  background: rgba(244, 190, 202, 0.62);
+}
+
+.wedding-card-layout {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 680px);
+  margin-inline: auto;
+  perspective: 1000px;
+}
+
+.wedding-card-image {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow:
+    0 45px 90px -50px rgba(95, 56, 63, 0.45),
+    0 15px 35px -28px rgba(74, 50, 44, 0.45);
+}
+
+.wedding-card-image::before {
+  content: none;
+}
+
+.wedding-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wedding-card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 42px;
+}
+
+.wedding-card-action-copy {
+  margin-bottom: 19px;
+  color: var(--wedding-rose);
+  font-family: var(--font-script), cursive;
+  font-size: clamp(31px, 4vw, 42px);
+}
+
+/* =========================================================
+   IMPROVED RSVP EXPERIENCE
+========================================================= */
+
+.rsvp-experience {
+  position: relative;
+  overflow: hidden;
+  padding: 120px max(24px, 5vw);
+  color: var(--wedding-ink);
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(228, 157, 176, 0.34),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 91% 85%,
+      rgba(246, 199, 207, 0.45),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #fffaf3 0%,
+      #f4e2e2 50%,
+      #fff9f1 100%
+    );
+}
+
+.rsvp-background-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(35px);
+}
+
+.rsvp-glow-one {
+  top: -170px;
+  right: 8%;
+  width: 430px;
+  height: 430px;
+  background: rgba(232, 173, 187, 0.36);
+}
+
+.rsvp-glow-two {
+  bottom: -210px;
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  background: rgba(245, 204, 211, 0.48);
+}
+
+.rsvp-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(480px, 1.15fr);
+  width: min(100%, 1250px);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgba(181, 146, 90, 0.42);
+  background: rgba(255, 251, 245, 0.82);
+  box-shadow:
+    0 45px 110px -55px rgba(99, 56, 66, 0.42),
+    0 14px 35px -28px rgba(75, 54, 48, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.rsvp-shell::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(181, 146, 90, 0.17);
+}
+
+.rsvp-visual {
+  position: relative;
+  min-height: 830px;
+  overflow: hidden;
+  border-radius: 48% 48% 0 0;
+}
+
+.rsvp-visual-image {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.025);
+}
+
+.rsvp-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(35, 22, 18, 0.12),
+      rgba(35, 22, 18, 0.2) 45%,
+      rgba(35, 22, 18, 0.85)
+    );
+}
+
+.rsvp-visual-copy {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  padding: 50px 48px;
+  text-align: center;
+  color: #fffaf1;
+}
+
+.rsvp-visual-copy .eyebrow {
+  color: rgba(255, 250, 241, 0.78);
+}
+
+.rsvp-visual-copy blockquote {
+  margin: 24px auto 0;
+  max-width: 450px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(24px, 2.3vw, 35px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.38;
+}
+
+.rsvp-signature {
+  margin-top: 28px;
+  color: #eed2ae;
+  font-family: var(--font-script), cursive;
+  font-size: clamp(38px, 4vw, 52px);
+  line-height: 1.1;
+}
+
+.rsvp-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px clamp(34px, 5vw, 75px);
+}
+
+.rsvp-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 26px;
+  color: var(--wedding-gold);
+}
+
+.rsvp-ornament span {
+  width: 65px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(181, 146, 90, 0.7)
+    );
+}
+
+.rsvp-ornament span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(181, 146, 90, 0.7),
+      transparent
+    );
+}
+
+.rsvp-ornament i {
+  font-size: 15px;
+  font-style: normal;
+}
+
+.rsvp-deadline {
+  text-align: center;
+  color: var(--wedding-gold);
+}
+
+.rsvp-title {
+  margin-top: 22px;
+  text-align: center;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(53px, 5vw, 75px);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+}
+
+.rsvp-title em {
+  display: block;
+  margin-top: 8px;
+  color: var(--wedding-rose);
+  font-family: var(--font-script), cursive;
+  font-size: 1.12em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.rsvp-introduction {
+  width: min(100%, 470px);
+  margin: 24px auto 45px;
+  text-align: center;
+  color: var(--wedding-muted);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.rsvp-form-refined {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 26px;
+}
+
+.rsvp-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 11px;
+  border: 0;
+  padding: 0;
+}
+
+.rsvp-field > span,
+.rsvp-field legend {
+  color: #806c58;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.rsvp-field input:not([type="radio"]),
+.rsvp-field select,
+.rsvp-field textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(181, 146, 90, 0.48);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  padding: 10px 0 13px;
+  color: var(--wedding-ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 20px;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.rsvp-field input::placeholder,
+.rsvp-field textarea::placeholder {
+  color: rgba(86, 70, 64, 0.42);
+}
+
+.rsvp-field input:focus,
+.rsvp-field select:focus,
+.rsvp-field textarea:focus {
+  border-color: var(--wedding-rose);
+  box-shadow: 0 7px 10px -10px var(--wedding-rose);
+}
+
+.rsvp-field textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.rsvp-wide-field {
+  grid-column: 1 / -1;
+}
+
+.rsvp-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin-top: 3px;
+}
+
+.rsvp-choice {
+  position: relative;
+  cursor: pointer;
+}
+
+.rsvp-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rsvp-choice > span {
+  display: grid;
+  grid-template-columns: 29px 1fr;
+  align-items: center;
+  min-height: 82px;
+  padding: 15px;
+  border: 1px solid rgba(181, 146, 90, 0.32);
+  background: rgba(255, 253, 248, 0.58);
+  transition:
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.rsvp-choice i {
+  grid-row: 1 / 3;
+  color: var(--wedding-gold);
+  font-family: var(--font-display), serif;
+  font-size: 18px;
+  font-style: normal;
+}
+
+.rsvp-choice strong {
+  color: var(--wedding-ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.rsvp-choice small {
+  margin-top: 4px;
+  color: var(--wedding-muted);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 13px;
+}
+
+.rsvp-choice input:checked + span {
+  border-color: var(--wedding-rose);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(245, 222, 225, 0.85),
+      rgba(255, 249, 241, 0.94)
+    );
+  box-shadow:
+    0 14px 28px -22px rgba(119, 70, 81, 0.6);
+  transform: translateY(-2px);
+}
+
+.rsvp-choice input:focus-visible + span {
+  outline: 2px solid var(--wedding-gold);
+  outline-offset: 3px;
+}
+
+.rsvp-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  min-width: 230px;
+  min-height: 52px;
+  margin-top: 10px;
+  border: 1px solid var(--wedding-rose);
+  background: var(--wedding-rose);
+  padding: 15px 27px;
+  color: #fffaf2;
+  cursor: pointer;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.rsvp-submit-button i {
+  margin-left: 13px;
+  font-style: normal;
+}
+
+.rsvp-submit-button:hover {
+  background: #7f4d58;
+  box-shadow:
+    0 18px 35px -23px rgba(90, 47, 57, 0.75);
+  transform: translateY(-2px);
+}
+
+.rsvp-submit-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.rsvp-helper,
+.rsvp-message {
+  margin-top: 21px;
+  text-align: center;
+  color: var(--wedding-muted);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.rsvp-message-success {
+  color: #677459;
+}
+
+.rsvp-message-error {
+  color: #a04d58;
+}
+
+/* Compact circular control: only stop/resume, no Enable Music pill */
+.music-control,
+.music-blocked {
+  width: 44px !important;
+  height: 44px;
+  padding: 0 !important;
+  border-radius: 50%;
+}
+
+.music-label {
+  display: none !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .rsvp-experience {
+    padding-inline: 22px;
+  }
+
+  .rsvp-shell {
+    grid-template-columns: 1fr;
+    width: min(100%, 650px);
+  }
+
+  .rsvp-visual {
+    min-height: 600px;
+    border-radius: 48% 48% 0 0;
+  }
+
+  .rsvp-content {
+    padding: 65px 48px 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wedding-card-section {
+    padding: 75px 16px 90px;
+  }
+
+  .wedding-card-image {
+    padding: 0;
+  }
+
+  .wedding-card-actions {
+    margin-top: 31px;
+  }
+
+  .rsvp-experience {
+    padding: 72px 16px;
+  }
+
+  .rsvp-shell::before {
+    inset: 6px;
+  }
+
+  .rsvp-visual {
+    min-height: 500px;
+  }
+
+  .rsvp-visual-copy {
+    padding: 38px 26px;
+  }
+
+  .rsvp-visual-copy blockquote {
+    font-size: 25px;
+  }
+
+  .rsvp-content {
+    padding: 52px 25px 58px;
+  }
+
+  .rsvp-title {
+    font-size: 52px;
+  }
+
+  .rsvp-introduction {
+    margin-bottom: 36px;
+    font-size: 18px;
+  }
+
+  .rsvp-form-refined {
+    grid-template-columns: 1fr;
+    gap: 27px;
+  }
+
+  .rsvp-wide-field {
+    grid-column: auto;
+  }
+
+  .rsvp-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-submit-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedding-card-image,
+  .wedding-card-actions,
+  .rsvp-visual,
+  .rsvp-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .rsvp-choice > span,
+  .rsvp-submit-button {
+    transition: none;
+  }
+}
+
+
+
+/* =========================================================
+   STATIC RING ENTRY GATE
+========================================================= */
+
+.ring-entry-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  color: var(--wedding-ink);
+  background:
+    radial-gradient(
+      circle at 50% 47%,
+      rgba(255, 255, 255, 0.94),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 16% 22%,
+      rgba(235, 178, 191, 0.23),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 87% 75%,
+      rgba(244, 201, 209, 0.3),
+      transparent 33%
+    ),
+    linear-gradient(
+      145deg,
+      #fffaf2 0%,
+      #f8ece8 50%,
+      #fffaf3 100%
+    );
+}
+
+.ring-entry-screen::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid
+    rgba(181, 146, 90, 0.18);
+}
+
+.ring-entry-screen::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(900px, 95vw);
+  height: 230px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(188, 143, 116, 0.14),
+      transparent 68%
+    );
+  filter: blur(16px);
+}
+
+.ring-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.ring-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ring-entry-content {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: max(55px, 8svh) 24px 40px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ring-entry-eyebrow {
+  color: #866a48;
+}
+
+.ring-entry-title {
+  margin-top: 9px;
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+  font-size: clamp(35px, 4vw, 55px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.ring-entry-title em {
+  display: block;
+  margin-top: 2px;
+  color: #92616b;
+  font-family:
+    var(--font-script),
+    cursive;
+  font-size: 1.35em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ring-entry-divider {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: auto;
+  color: var(--wedding-gold);
+}
+
+.ring-entry-divider span {
+  width: 52px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--wedding-gold)
+    );
+}
+
+.ring-entry-divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      var(--wedding-gold),
+      transparent
+    );
+}
+
+.ring-entry-divider i {
+  font-size: 12px;
+  font-style: normal;
+}
+
+.ring-entry-message {
+  margin-top: 17px;
+  color: #715f55;
+  font-family:
+    var(--font-display),
+    Georgia,
+    serif;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.ring-entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+  pointer-events: auto;
+}
+
+.ring-entry-primary,
+.ring-entry-secondary {
+  min-height: 48px;
+  cursor: pointer;
+  font-family:
+    var(--font-sans),
+    Arial,
+    sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    color 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.ring-entry-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 202px;
+  border: 1px solid #8e5d68;
+  background: #8e5d68;
+  padding: 14px 24px;
+  color: #fffaf2;
+}
+
+.ring-entry-primary i {
+  margin-left: 13px;
+  color: #f0d5b2;
+  font-size: 14px;
+  font-style: normal;
+}
+
+.ring-entry-primary:hover {
+  background: #784b55;
+  border-color: #784b55;
+  transform: translateY(-2px);
+}
+
+.ring-entry-secondary {
+  border: 0;
+  border-bottom: 1px solid
+    rgba(119, 89, 69, 0.45);
+  background: transparent;
+  padding: 12px 4px 8px;
+  color: #705f55;
+}
+
+.ring-entry-secondary:hover {
+  border-color: #8e5d68;
+  color: #8e5d68;
+  transform: translateY(-2px);
+}
+
+.ring-entry-primary:disabled,
+.ring-entry-secondary:disabled {
+  cursor: wait;
+  opacity: 0.55;
+  transform: none;
+}
+
+.ring-entry-caption {
+  position: absolute;
+  right: 30px;
+  bottom: 27px;
+  z-index: 5;
+  color: #705e54;
+  font-family:
+    var(--font-sans),
+    Arial,
+    sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.ring-entry-caption span {
+  margin-inline: 8px;
+  color: var(--wedding-gold);
+}
+
+@media (max-width: 600px) {
+  .ring-entry-screen::before {
+    inset: 10px;
+  }
+
+  .ring-entry-content {
+    padding:
+      max(45px, 7svh)
+      20px
+      34px;
+  }
+
+  .ring-entry-eyebrow {
+    font-size: 8px;
+  }
+
+  .ring-entry-title {
+    font-size: 37px;
+  }
+
+  .ring-entry-divider {
+    margin-top: auto;
+  }
+
+  .ring-entry-actions {
+    width: 100%;
+    max-width: 290px;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .ring-entry-primary {
+    width: 100%;
+  }
+
+  .ring-entry-secondary {
+    min-height: 40px;
+  }
+
+  .ring-entry-caption {
+    right: 18px;
+    bottom: 15px;
+    left: 18px;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-entry-primary,
+  .ring-entry-secondary {
+    transition: none;
+  }
+}

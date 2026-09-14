@@ -1,95 +1,58 @@
 'use client';
-
 import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import Photo from './Photo';
-import { couple, scriptures, photos } from '@/lib/site';
-
+import { photos, couple } from '@/lib/site';
 export default function FinalBlessing() {
-  const root = useRef<HTMLDivElement>(null);
-
+  const root = useRef<HTMLElement>(null);
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      const q = gsap.utils.selector(root);
-
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-fb]'), { autoAlpha: 1, y: 0 });
-      });
-
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.fromTo(
-          q('[data-fb-img]'),
-          { scale: 1.15 },
-          {
-            scale: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: root.current,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1,
-            },
+        gsap.from('.closing-photo', {
+          scale: 1.12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
           },
-        );
-
-        gsap.fromTo(
-          q('[data-fb]'),
-          { autoAlpha: 0, y: 34 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 1.4,
-            ease: 'power3.out',
-            stagger: 0.2,
-            scrollTrigger: { trigger: root.current, start: 'top 45%' },
-          },
-        );
+        });
+        gsap.from('.closing-copy > *', {
+          y: 25,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 1.3,
+          scrollTrigger: { trigger: root.current, start: 'top 60%' },
+        });
       });
+      return () => mm.revert();
     },
     { scope: root },
   );
-
   return (
-    <section ref={root} className="relative min-h-screen overflow-hidden bg-blush" data-music-vol="0.25">
-      <div data-fb-img className="absolute inset-0">
+    <section ref={root} className="closing-section" data-music-vol="0.25">
+      <div className="closing-photo">
         <Photo
           src={photos.farewell}
-          alt="The couple walking away into the evening light"
-          tone="wine"
-          seed={71}
-          style={{ position: 'absolute', inset: 0 }}
-          sizes="100vw"
+          alt="The couple walking together into the evening"
+          className="fill-photo"
         />
       </div>
-      {/* darken toward the bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/60 to-ink" />
-
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-32 text-center text-ivory">
-        <h2 data-fb className="display-md text-ivory">
-          THANK YOU
-          <br />
-          FOR BEING PART OF
-          <br />
-          OUR STORY.
+      <div className="closing-shade" />
+      <div className="closing-copy">
+        <h2>
+          With grateful hearts,<em>and all our love.</em>
         </h2>
-
-        <p data-fb className="mt-8 max-w-md font-serif-e text-lg text-ivory/75 md:text-xl">
-          We cannot wait to celebrate this blessing with you.
+        <p>
+          Thank you for being part of our story.
+          <br />
+          We cannot wait to celebrate with you.
         </p>
-
-        <p data-fb className="font-script mt-10 text-4xl text-rose md:text-5xl">
-          {couple.groom} &amp; {couple.bride}
+        <p className="closing-signature">
+          {couple.groom} & {couple.bride}
         </p>
-
-        <div data-fb className="mt-16 max-w-lg">
-          <p className="font-display text-xl italic leading-snug text-ivory/70 md:text-2xl">
-            &ldquo;The Lord has done great things for us,
-            <br />
-            and we are filled with joy.&rdquo;
-          </p>
-          <p className="eyebrow mt-6 text-rose">{scriptures.psalm.ref}</p>
-        </div>
       </div>
     </section>
   );

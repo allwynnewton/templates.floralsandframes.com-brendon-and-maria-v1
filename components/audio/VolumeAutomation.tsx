@@ -14,9 +14,7 @@ export default function VolumeAutomation() {
   const { setZoneVolume, resetZoneVolume } = useMusic();
 
   useEffect(() => {
-    const nodes = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-music-vol]'),
-    );
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-music-vol]'));
     if (!nodes.length) return;
 
     const visible = new Map<HTMLElement, number>(); // el -> intersectionRatio

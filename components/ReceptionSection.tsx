@@ -90,12 +90,8 @@ export default function ReceptionSection() {
         </h2>
 
         <div data-rc className="mt-14 flex flex-col items-center gap-2">
-          <p className="font-display text-3xl text-rose md:text-4xl">
-            {wedding.reception.venue}
-          </p>
-          <p className="font-serif-e text-lg text-ivory/80">
-            {wedding.reception.resort}
-          </p>
+          <p className="font-display text-3xl text-rose md:text-4xl">{wedding.reception.venue}</p>
+          <p className="font-serif-e text-lg text-ivory/80">{wedding.reception.resort}</p>
           <p className="eyebrow mt-4 text-ivory/70">{wedding.reception.time}</p>
           <p className="eyebrow text-ivory/70">{wedding.reception.note}</p>
           <a

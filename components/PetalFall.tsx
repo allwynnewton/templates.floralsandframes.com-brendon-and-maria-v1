@@ -73,7 +73,13 @@ export default function PetalFall() {
           .to(node, { autoAlpha: 0.95, duration: 0.7, ease: 'sine.out' }, 0)
           .to(
             node,
-            { y: fall, x: p.drift, rotation: p.rot + p.spin, duration: p.duration, ease: 'sine.inOut' },
+            {
+              y: fall,
+              x: p.drift,
+              rotation: p.rot + p.spin,
+              duration: p.duration,
+              ease: 'sine.inOut',
+            },
             0,
           )
           .to(node, { autoAlpha: 0, duration: 1, ease: 'sine.in' }, p.duration - 1);

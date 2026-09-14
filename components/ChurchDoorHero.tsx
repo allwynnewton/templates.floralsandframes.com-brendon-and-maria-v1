@@ -113,7 +113,14 @@ export default function ChurchDoorHero() {
             .to(above, { autoAlpha: 1, y: 0, duration: 0.9 }, 7)
             .to(
               nameLetters,
-              { autoAlpha: 1, y: 0, letterSpacing: '0.03em', duration: 1.4, ease: 'power3.out', stagger: 0.2 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                letterSpacing: '0.03em',
+                duration: 1.4,
+                ease: 'power3.out',
+                stagger: 0.2,
+              },
               7.1,
             )
             .to(below, { autoAlpha: 1, y: 0, duration: 0.9 }, 7.9);
@@ -247,7 +254,10 @@ export default function ChurchDoorHero() {
               <span data-name-line className="block">
                 {couple.groom.toUpperCase()}
               </span>
-              <span data-name-line className="block font-script text-rose text-[0.42em] leading-none my-1">
+              <span
+                data-name-line
+                className="block font-script text-rose text-[0.42em] leading-none my-1"
+              >
                 &amp;
               </span>
               <span data-name-line className="block">
@@ -290,8 +300,7 @@ function DoorFace({ side }: { side: 'left' | 'right' }) {
     <div
       className="relative h-full w-full"
       style={{
-        background:
-          'linear-gradient(100deg, #efe7dd 0%, #e6d8c8 45%, #f4ede3 100%)',
+        background: 'linear-gradient(100deg, #efe7dd 0%, #e6d8c8 45%, #f4ede3 100%)',
         boxShadow:
           side === 'left'
             ? 'inset -30px 0 60px -20px rgba(150,128,118,0.4)'
@@ -308,8 +317,7 @@ function DoorFace({ side }: { side: 'left' | 'right' }) {
             style={{
               border: '1px solid rgba(156,107,120,0.18)',
               boxShadow: 'inset 0 0 30px rgba(150,128,124,0.22)',
-              background:
-                'linear-gradient(180deg, rgba(217,139,152,0.07), transparent)',
+              background: 'linear-gradient(180deg, rgba(217,139,152,0.07), transparent)',
             }}
           />
         ))}
