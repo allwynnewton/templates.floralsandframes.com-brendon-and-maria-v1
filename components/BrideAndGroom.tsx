@@ -13,9 +13,15 @@ export default function BrideAndGroom() {
         gsap.from('.portrait-frame', {
           clipPath: 'inset(100% 0% 0% 0%)',
           duration: 1.7,
-          stagger: 0.2,
+          stagger: 0.15,
           ease: 'power3.inOut',
           scrollTrigger: { trigger: root.current, start: 'top 55%' },
+        });
+        gsap.from('.portrait-amp', {
+          opacity: 0,
+          duration: 1.3,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: root.current, start: 'top 42%' },
         });
         gsap.from('.portrait-name', {
           y: 25,
@@ -42,8 +48,8 @@ export default function BrideAndGroom() {
       </Reveal>
       <div className="portrait-grid">
         {[
-          { name: couple.bride, role: 'The bride', src: photos.bride },
-          { name: couple.groom, role: 'The groom', src: photos.groom },
+          { name: couple.bride, role: 'Bride-to-be', src: photos.bride },
+          { name: couple.groom, role: 'Groom-to-be', src: photos.groom },
         ].map((p) => (
           <figure key={p.role}>
             <div className="portrait-frame">

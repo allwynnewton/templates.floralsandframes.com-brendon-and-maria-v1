@@ -150,7 +150,7 @@ export default function OpeningSequence() {
         <div className={`opening-invitation ${failed ? 'film-fallback' : ''}`}>
           <div className="invitation-halo" />
           <Photo
-            src={photos.hero}
+            src={photos.invitation}
             alt="Brendon and Maria together on their wedding day"
             priority
             className="invitation-photo"
@@ -172,6 +172,7 @@ export default function OpeningSequence() {
           <span />
           Scroll to unfold our story
         </div>
+        {!introDone && <div className="opening-cover" aria-hidden />}
         {!introDone && <RingPortal onDone={finish} />}
       </div>
     </section>

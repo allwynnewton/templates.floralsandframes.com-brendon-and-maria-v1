@@ -298,7 +298,7 @@ export default function RSVPSection() {
       <div className="rsvp-shell">
         <div className="rsvp-visual">
           <Image
-            src={photos.hero}
+            src={photos.rsvp}
             alt={`${couple.groom} and ${couple.bride} together`}
             fill
             sizes="(max-width: 850px) 92vw, 44vw"

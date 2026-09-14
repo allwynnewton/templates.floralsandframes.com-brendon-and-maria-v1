@@ -122,11 +122,13 @@ export const music = {
 // files and list them here — e.g. story: ['/images/2.jpg','/images/2b.jpg', …].
 export const photos = {
   hero: '/images/1.jpg', // opening hero — the couple
-  story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/2.jpg'], // "God Wrote Our Story" milestones (4 slots, now all unique)
+  invitation: '/images/10.jpg', // opening invitation card — the over-photo names/date
+  rsvp: '/images/13.jpg', // "Will you join us?" RSVP visual — intimate couple moment
+  story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/11.jpg'], // "God Wrote Our Story" milestones (4 slots; [3]=11.jpg "Forever begins")
   parallax: ['/images/3.jpg', '/images/3-cake.jpg', '/images/3c.jpg'], // full-screen parallax (3 slots, now all unique)
   proposal: ['/images/4.jpg', '/images/4b.jpg'], // proposal sequence (2 cards, both unique)
-  bride: '/images/5-bride.jpg',
-  groom: '/images/5-groom.jpg',
+  bride: '/images/maria-portrait.jpg', // pre-wedding solo, cropped from 11.jpg
+  groom: '/images/brendon-portrait.jpg', // pre-wedding solo, cropped from 11.jpg
   // memory collage (5 slots) — now fully dedicated (no photos borrowed from
   // other sections). Portrait tiles hold portrait shots; wide tiles hold landscape.
   memory: [

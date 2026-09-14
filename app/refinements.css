@@ -725,6 +725,39 @@ body::before {
    STATIC RING ENTRY GATE
 ========================================================= */
 
+/* Instant opaque backdrop painted on first render (server-rendered),
+   so the church video poster never flashes before the dynamically
+   imported 3D ring (ring-entry-screen, z-index 60) initializes.
+   Matches the ring scene's background and sits just beneath it. */
+.opening-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 59;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 47%,
+      rgba(255, 255, 255, 0.94),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 16% 22%,
+      rgba(235, 178, 191, 0.23),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 87% 75%,
+      rgba(244, 201, 209, 0.3),
+      transparent 33%
+    ),
+    linear-gradient(
+      145deg,
+      #fffaf2 0%,
+      #f8ece8 50%,
+      #fffaf3 100%
+    );
+}
+
 .ring-entry-screen {
   position: absolute;
   inset: 0;

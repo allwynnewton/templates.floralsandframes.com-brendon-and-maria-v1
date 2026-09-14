@@ -446,12 +446,35 @@ em {
   width: 100%;
   height: 100%;
 }
+/* Soft central scrim: sits above the arch photo but below the copy
+   (which has z-index:1), giving the ivory names/date reliable ground
+   over the warm engagement photo while the pale halo edges stay light. */
+.opening-invitation::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 72% 64% at 50% 50%,
+    rgba(28, 20, 14, 0.5),
+    rgba(28, 20, 14, 0) 76%
+  );
+}
 .opening-film {
   object-fit: cover;
   object-position: center;
 }
 .film-shade {
-  background: linear-gradient(180deg, #1b1a183d, #16120e38 45%, #16120eab);
+  /* Centered radial gives the vertically-centered titles their own dark
+     ground over the brightest church frames, while the church stays
+     visible at the edges; linear layer keeps the base cinematic scrim. */
+  background:
+    radial-gradient(
+      ellipse 62% 44% at 50% 47%,
+      rgba(15, 10, 7, 0.6),
+      rgba(15, 10, 7, 0) 72%
+    ),
+    linear-gradient(180deg, #1b1a1847, #16120e40 45%, #16120eb0);
 }
 .film-heading {
   position: absolute;
@@ -463,6 +486,9 @@ em {
   color: #fff8eb;
   text-align: center;
   padding: 24px;
+  text-shadow:
+    0 1px 2px rgba(18, 12, 8, 0.45),
+    0 4px 22px rgba(18, 12, 8, 0.55);
 }
 .film-heading h1 {
   font-size: clamp(62px, 8vw, 124px);
@@ -471,8 +497,11 @@ em {
 }
 .film-heading h1 em {
   display: block;
-  font-size: 1.12em;
-  color: #eedab0;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 1.06em;
+  letter-spacing: 0.005em;
+  color: #fff8eb;
 }
 .film-subtitle {
   font-size: 23px;
@@ -489,10 +518,15 @@ em {
   line-height: 1.2;
   color: #fff8eb;
   opacity: 0;
+  text-shadow:
+    0 1px 2px rgba(18, 12, 8, 0.45),
+    0 4px 22px rgba(18, 12, 8, 0.55);
 }
 .film-promise em {
-  color: #efdab0;
-  font-size: 1.2em;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 1.08em;
+  color: #fff8eb;
 }
 .film-scroll {
   position: absolute;
@@ -558,7 +592,9 @@ em {
   padding: 6svh 20px;
   color: #fffaf1;
   z-index: 1;
-  text-shadow: 0 2px 28px #221a1370;
+  text-shadow:
+    0 1px 3px rgba(20, 14, 9, 0.55),
+    0 2px 28px rgba(34, 26, 19, 0.6);
 }
 .invitation-copy > p:first-child {
   margin-bottom: 25px;
@@ -1000,7 +1036,14 @@ em {
 }
 .couple-section {
   padding: 100px 7vw;
-  background: linear-gradient(#faf6ef, #f0e9dd);
+  /* barely-there blush glow adds depth to the flat ivory ground */
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(190, 118, 135, 0.05),
+      transparent 45%
+    ),
+    linear-gradient(#faf6ef, #f0e9dd);
 }
 .portrait-grid {
   max-width: 1050px;
@@ -1011,14 +1054,24 @@ em {
   position: relative;
 }
 .portrait-frame {
+  position: relative;
   border: 1px solid #b4945e80;
   padding: 10px;
   border-radius: 49% 49% 0 0;
-  overflow: hidden;
+}
+/* second, extremely faint outer arch line — fine-stationery linework */
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid #b4945e2b;
+  border-radius: 50% 50% 0 0;
+  pointer-events: none;
 }
 .portrait-photo {
   aspect-ratio: 3/4;
   border-radius: 49% 49% 0 0;
+  overflow: hidden;
 }
 .portrait-grid figure:nth-child(2) {
   margin-top: 75px;
@@ -1035,8 +1088,11 @@ em {
   line-height: 1.3;
 }
 .portrait-name p {
-  color: #816543;
-  margin-top: 8px;
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  color: #a98a5f;
+  opacity: 0.85;
 }
 .portrait-amp {
   position: absolute;
@@ -1044,7 +1100,7 @@ em {
   top: 42%;
   transform: translate(-50%, -50%);
   font:
-    85px var(--font-script),
+    62px var(--font-script),
     cursive;
   color: #b4945e;
 }
@@ -1574,8 +1630,7 @@ em {
     grid-template-columns: 1fr;
   }
   .portrait-grid figure {
-    max-width: 340px;
-    width: 100%;
+    width: min(78vw, 340px);
     justify-self: start;
   }
   .portrait-grid figure:nth-child(2) {
@@ -1583,7 +1638,7 @@ em {
     justify-self: end;
   }
   .portrait-amp {
-    font-size: 57px;
+    font-size: 46px;
     top: 50%;
     left: 50%;
   }
