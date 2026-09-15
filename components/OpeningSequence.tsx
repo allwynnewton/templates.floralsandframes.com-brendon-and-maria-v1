@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { gsap, useGSAP, ScrollTrigger } from '@/lib/gsap';
 import { couple, wedding, photos } from '@/lib/site';
 import Photo from './Photo';
+import InvitationDecor from './InvitationDecor';
 const RingPortal = dynamic(() => import('./RingPortal'), { ssr: false });
 export default function OpeningSequence() {
   const root = useRef<HTMLElement>(null),
@@ -86,10 +87,22 @@ export default function OpeningSequence() {
               6,
             )
             .fromTo(
+              q('.flourish-path'),
+              { strokeDashoffset: 1 },
+              { strokeDashoffset: 0, duration: 1.8, ease: 'power1.inOut', stagger: 0.25 },
+              6.7,
+            )
+            .fromTo(
               q('.invitation-copy > *'),
               { opacity: 0, y: 24 },
               { opacity: 1, y: 0, stagger: 0.12, duration: 1 },
               7.1,
+            )
+            .fromTo(
+              q('.invitation-aside'),
+              { autoAlpha: 0, y: 16 },
+              { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.18, ease: 'power2.out' },
+              7.4,
             )
             .to(q('.film-scroll'), { opacity: 0, duration: 0.4 }, 7)
             .to({}, { duration: 1.2 });
@@ -149,6 +162,7 @@ export default function OpeningSequence() {
         </p>
         <div className={`opening-invitation ${failed ? 'film-fallback' : ''}`}>
           <div className="invitation-halo" />
+          <InvitationDecor />
           <Photo
             src={photos.invitation}
             alt="Brendon and Maria together on their wedding day"
