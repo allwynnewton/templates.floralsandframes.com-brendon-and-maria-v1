@@ -48,8 +48,8 @@ export default function BrideAndGroom() {
       </Reveal>
       <div className="portrait-grid">
         {[
-          { name: couple.bride, role: 'Bride-to-be', src: photos.bride },
           { name: couple.groom, role: 'Groom-to-be', src: photos.groom },
+          { name: couple.bride, role: 'Bride-to-be', src: photos.bride },
         ].map((p) => (
           <figure key={p.role}>
             <div className="portrait-frame">

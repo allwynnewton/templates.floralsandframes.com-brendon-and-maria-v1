@@ -127,8 +127,8 @@ export const photos = {
   story: ['/images/2a.jpg', '/images/2b.jpg', '/images/2c.jpg', '/images/11.jpg'], // "God Wrote Our Story" milestones (4 slots; [3]=11.jpg "Forever begins")
   parallax: ['/images/3.jpg', '/images/3-cake.jpg', '/images/3c.jpg'], // full-screen parallax (3 slots, now all unique)
   proposal: ['/images/4.jpg', '/images/4b.jpg'], // proposal sequence (2 cards, both unique)
-  bride: '/images/maria-portrait.jpg', // pre-wedding solo, cropped from 11.jpg
-  groom: '/images/brendon-portrait.jpg', // pre-wedding solo, cropped from 11.jpg
+  bride: '/images/maria-17b.jpg', // solo portrait from 17b
+  groom: '/images/brendon-portrait.jpg', // solo portrait, cropped from 16.jpg
   // memory collage (5 slots) — now fully dedicated (no photos borrowed from
   // other sections). Portrait tiles hold portrait shots; wide tiles hold landscape.
   memory: [
